@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 1938829962
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c262b568bccb72505f1e0ff03099b574
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c73412a662fd4e4f36af34cbdf078b85
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_48.png
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_41.png
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_49.png
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_45.png
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_47.png
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_44.png
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_43.png
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_46.png
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_62.png
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_42.png
+- Assets/AssetBundle/Icon/INV_Weapon_Shortblade_40.png
+Dependencies: []

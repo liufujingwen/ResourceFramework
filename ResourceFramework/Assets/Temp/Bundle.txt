@@ -1,0 +1,28 @@
+﻿assets/assetbundle/atlas/bear.ab
+	Assets/AssetBundle/Atlas/Bear/Bear.spriteatlas
+	Assets/AssetBundle/Atlas/Bear/Bear_1.png
+	Assets/AssetBundle/Atlas/Bear/Bear_2.png
+	Assets/AssetBundle/Atlas/Bear/Bear_3.png
+	Assets/AssetBundle/Atlas/Bear/Bear_4.png
+	Assets/AssetBundle/Atlas/Bear/Bear_5.png
+	Assets/AssetBundle/Atlas/Bear/Bear_6.png
+	Assets/AssetBundle/Atlas/Bear/Bear_7.png
+	Assets/AssetBundle/Atlas/Bear/Bear_8.png
+assets/assetbundle/background/background_01.jpg.ab
+	Assets/AssetBundle/Background/Background_01.jpg
+assets/assetbundle/background/background_02.jpg.ab
+	Assets/AssetBundle/Background/Background_02.jpg
+assets/assetbundle/icon.ab
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_40.png
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_41.png
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_42.png
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_43.png
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_44.png
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_45.png
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_46.png
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_47.png
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_48.png
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_49.png
+	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_62.png
+assets/assetbundle/model/gebulin.ab
+	Assets/AssetBundle/Model/GeBuLin/GeBuLin.prefab

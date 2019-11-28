@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ResourceFramework
 {
@@ -17,8 +18,19 @@ namespace ResourceFramework
 #else
         private const string PLATFORM = "windows";
 #endif
+        //bundle后缀
+        public const string BUNDLE_SUFFIX = ".ab";
+        public const string MANIFEST_SUFFIX = ".manifest";
+        //bundle文件夹名称
+        public const string BUNDLE_FOLDER = "bundle";
 
-        public const string ASSET_BUNDLE = ".ab";
+        public static readonly ParallelOptions ParallelOptions = new ParallelOptions()
+        {
+            MaxDegreeOfParallelism = Environment.ProcessorCount * 2
+        };
+
+        //bundle打包Options
+        public readonly static BuildAssetBundleOptions BuildAssetBundleOptions = BuildAssetBundleOptions.ChunkBasedCompression | BuildAssetBundleOptions.DeterministicAssetBundle | BuildAssetBundleOptions.StrictMode | BuildAssetBundleOptions.DisableLoadAssetByFileName | BuildAssetBundleOptions.DisableLoadAssetByFileNameWithExtension;
 
         /// <summary>
         /// 打包设置
@@ -30,17 +42,17 @@ namespace ResourceFramework
         /// <summary>
         /// 打包配置
         /// </summary>
-        public static string BuildSettingPath = Path.GetFullPath("../BuildSetting.xml").Replace("\\", "/");
+        public readonly static string BuildSettingPath = Path.GetFullPath("../BuildSetting.xml").Replace("\\", "/");
 
         /// <summary>
         /// 临时目录,临时生成的文件都统一放在该目录
         /// </summary>
-        public static string TempPath = Path.Combine(Application.dataPath, "Temp").Replace("\\", "/");
+        public readonly static string TempPath = Path.Combine(Application.dataPath, "Temp").Replace("\\", "/");
 
         /// <summary>
         /// 资源描述__文本
         /// </summary>
-        public static string ResourcePath_Text = $"{TempPath}/Resource.txt";
+        public readonly static string ResourcePath_Text = $"{TempPath}/Resource.txt";
 
         /// <summary>
         /// 资源描述__二进制
@@ -50,23 +62,26 @@ namespace ResourceFramework
         /// <summary>
         /// Bundle描述__文本
         /// </summary>
-        public static string BundlePath_Text = $"{TempPath}/Bundle.txt";
+        public readonly static string BundlePath_Text = $"{TempPath}/Bundle.txt";
 
         /// <summary>
         /// Bundle描述__二进制
         /// </summary>
-        public static string BundlePath_Binary = $"{TempPath}/Bundle.bytes";
+        public readonly static string BundlePath_Binary = $"{TempPath}/Bundle.bytes";
 
         /// <summary>
         /// 资源依赖描述__文本
         /// </summary>
-        public static string DependencyPath_Text = $"{TempPath}/Dependency.txt";
+        public readonly static string DependencyPath_Text = $"{TempPath}/Dependency.txt";
 
         /// <summary>
         /// 资源依赖描述__文本
         /// </summary>
-        public static string DependencyPath_Binary = $"{TempPath}/Dependency.txt";
+        public readonly static string DependencyPath_Binary = $"{TempPath}/Dependency.txt";
 
+        /// <summary>
+        /// 打包目录
+        /// </summary>
         public static string buildPath { get; set; }
 
         #endregion
@@ -118,25 +133,8 @@ namespace ResourceFramework
         /// 加载打包配置文件
         /// </summary>
         /// <param name="settingPath">打包配置路径</param>
-        private static void LoadSetting(string settingPath)
+        private static BuildSetting LoadSetting(string settingPath)
         {
-            buildSetting = new BuildSetting();
-
-            buildSetting.projectName = "haru";
-            buildSetting.buildRoot = "../build";
-
-            for (int i = 0; i < 3; i++)
-            {
-                BuildItem item = new BuildItem();
-                item.assetPath = "Assets/" + i + "/";
-                item.bundleType = EBundleType.File;
-                item.suffix = ".prefab";
-
-                buildSetting.items.Add(item);
-            }
-
-            XmlUtility.Save(settingPath, buildSetting);
-
             buildSetting = XmlUtility.Read<BuildSetting>(settingPath);
             (buildSetting as ISupportInitialize).EndInit();
 
@@ -145,14 +143,21 @@ namespace ResourceFramework
             {
                 buildPath += "/";
             }
-            buildPath += PLATFORM + "/";
+            buildPath += $"{PLATFORM}/{BUNDLE_FOLDER}/";
+
+            return buildSetting;
         }
 
         private static void Build()
         {
             SwitchPlatform();
-            LoadSetting(BuildSettingPath);
-            Collect();
+            buildSetting = LoadSetting(BuildSettingPath);
+            //搜集bundle信息
+            Dictionary<string, List<string>> bundleDic = Collect();
+            //打包assetbundle
+            BuildBundle(bundleDic);
+            //清空多余文件
+            ClearAssetBundle(buildPath, bundleDic);
         }
 
         /// <summary>
@@ -163,7 +168,9 @@ namespace ResourceFramework
         private static Dictionary<string, List<string>> Collect()
         {
             //获取所有在打包设置的文件列表
+
             HashSet<string> files = buildSetting.Collect();
+            EditorUtility.ClearProgressBar();
 
             //搜集所有文件的依赖关系
             Dictionary<string, List<string>> dependencyDic = CollectDependency(files);
@@ -180,7 +187,7 @@ namespace ResourceFramework
             //依赖的资源标记为Dependency，已经存在的说明是Direct的资源
             foreach (string url in dependencyDic.Keys)
             {
-                if (!dependencyDic.ContainsKey(url))
+                if (!assetDic.ContainsKey(url))
                 {
                     assetDic.Add(url, EReferenceType.Dependency);
                 }
@@ -202,6 +209,8 @@ namespace ResourceFramework
         /// <returns>依赖信息</returns>
         private static Dictionary<string, List<string>> CollectDependency(ICollection<string> files)
         {
+            EditorUtility.DisplayProgressBar($"{nameof(CollectDependency)}", "搜集依赖信息", 0);
+
             Dictionary<string, List<string>> dependencyDic = new Dictionary<string, List<string>>();
 
             //声明fileList后，就不需要递归了
@@ -222,14 +231,20 @@ namespace ResourceFramework
                 {
                     string tempAssetUrl = dependencies[ii];
                     string extension = Path.GetExtension(tempAssetUrl).ToLower();
-                    if (extension == ".cs" || extension == ".dll")
+                    if (string.IsNullOrEmpty(extension) || extension == ".cs" || extension == ".dll")
                         continue;
                     dependencyList.Add(tempAssetUrl);
-                    fileList.Add(tempAssetUrl);
+                    if (!fileList.Contains(tempAssetUrl))
+                        fileList.Add(tempAssetUrl);
                 }
 
                 dependencyDic.Add(assetUrl, dependencyList);
+
+                EditorUtility.DisplayProgressBar($"{nameof(CollectDependency)}", "搜集依赖信息", (float)dependencyDic.Count / fileList.Count);
+
             }
+
+            EditorUtility.ClearProgressBar();
 
             return dependencyDic;
         }
@@ -243,12 +258,16 @@ namespace ResourceFramework
         /// <returns>bundle包信息</returns>
         private static Dictionary<string, List<string>> CollectBundle(BuildSetting buildSetting, Dictionary<string, EReferenceType> assetDic, Dictionary<string, List<string>> dependencyDic)
         {
+            EditorUtility.DisplayProgressBar($"{nameof(CollectBundle)}", "搜集bundle信息", 0);
+
             Dictionary<string, List<string>> bundleDic = new Dictionary<string, List<string>>();
             //外部资源
             List<string> externalList = new List<string>();
 
+            int index = 0;
             foreach (KeyValuePair<string, EReferenceType> pair in assetDic)
             {
+                index++;
                 string assetUrl = pair.Key;
                 string bundleName = buildSetting.GetBundleName(assetUrl, pair.Value);
 
@@ -267,6 +286,8 @@ namespace ResourceFramework
                 }
 
                 list.Add(assetUrl);
+
+                EditorUtility.DisplayProgressBar($"{nameof(CollectBundle)}", "搜集bundle信息", (float)index / assetDic.Count);
             }
 
             //todo...  外部资源
@@ -276,6 +297,8 @@ namespace ResourceFramework
             {
                 list.Sort();
             }
+
+            EditorUtility.ClearProgressBar();
 
             return bundleDic;
         }
@@ -288,6 +311,8 @@ namespace ResourceFramework
         /// </summary>
         private static void GenerateManifest(Dictionary<string, EReferenceType> assetDic, Dictionary<string, List<string>> bundleDic, Dictionary<string, List<string>> dependencyDic)
         {
+            EditorUtility.DisplayProgressBar($"{nameof(GenerateManifest)}", "生成打包信息", 0);
+
             //生成临时存放文件的目录
             if (!Directory.Exists(TempPath))
                 Directory.CreateDirectory(TempPath);
@@ -310,7 +335,11 @@ namespace ResourceFramework
                 MemoryStream resourceMs = new MemoryStream();
                 BinaryWriter resourceBw = new BinaryWriter(resourceMs);
                 if (assetDic.Count > ushort.MaxValue)
+                {
+                    EditorUtility.ClearProgressBar();
                     throw new Exception($"资源个数超出{ushort.MaxValue}");
+                }
+
                 //写入个数
                 resourceBw.Write((ushort)assetDic.Count);
                 ushort resourceId = 0;
@@ -330,6 +359,8 @@ namespace ResourceFramework
                 File.WriteAllBytes(ResourcePath_Binary, buffer);
             }
             #endregion
+
+            EditorUtility.DisplayProgressBar($"{nameof(GenerateManifest)}", "生成打包信息", 0.3f);
 
             #region 生成bundle描述信息
             {
@@ -379,6 +410,8 @@ namespace ResourceFramework
             }
             #endregion
 
+            EditorUtility.DisplayProgressBar($"{nameof(GenerateManifest)}", "生成打包信息", 0.8f);
+
             #region 生成资源依赖描述信息
             {
                 //删除资源依赖描述文本文件
@@ -417,7 +450,10 @@ namespace ResourceFramework
                     dependencySb.AppendLine(content);
 
                     if (ids.Count > byte.MaxValue)
+                    {
+                        EditorUtility.ClearProgressBar();
                         throw new Exception($"资源{assetUrl}的依赖超出一个字节上限:{byte.MaxValue}");
+                    }
                     for (int i = 0; i < ids.Count; i++)
                         dependencyBw.Write(ids[i]);
                 }
@@ -430,6 +466,68 @@ namespace ResourceFramework
                 File.WriteAllBytes(DependencyPath_Binary, buffer);
             }
             #endregion
+
+            EditorUtility.DisplayProgressBar($"{nameof(GenerateManifest)}", "生成打包信息", 1);
+
+            EditorUtility.ClearProgressBar();
+        }
+
+        /// <summary>
+        /// 打包AssetBundle
+        /// <param name="assetDic">资源列表</param>
+        /// <param name="bundleDic">bundle包信息</param>
+        /// <param name="dependencyDic">资源依赖信息</param>
+        /// </summary>
+        private static AssetBundleManifest BuildBundle(Dictionary<string, List<string>> bundleDic)
+        {
+            if (!Directory.Exists(buildPath))
+                Directory.CreateDirectory(buildPath);
+
+            AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(buildPath, GetBuilds(bundleDic), BuildAssetBundleOptions, EditorUserBuildSettings.activeBuildTarget);
+            return manifest;
+        }
+
+        /// <summary>
+        /// 获取所有需要打包的AssetBundleBuild
+        /// </summary>
+        /// <param name="bundleTable">bunlde信息</param>
+        /// <returns></returns>
+        private static AssetBundleBuild[] GetBuilds(Dictionary<string, List<string>> bundleTable)
+        {
+            int index = 0;
+            AssetBundleBuild[] assetBundleBuilds = new AssetBundleBuild[bundleTable.Count];
+            foreach (KeyValuePair<string, List<string>> pair in bundleTable)
+            {
+                assetBundleBuilds[index++] = new AssetBundleBuild()
+                {
+                    assetBundleName = pair.Key,
+                    assetNames = pair.Value.ToArray(),
+                };
+            }
+
+            return assetBundleBuilds;
+        }
+
+        /// <summary>
+        /// 清空多余的assetbundle
+        /// </summary>
+        /// <param name="path">打包路径</param>
+        /// <param name="bundleDic"></param>
+        private static void ClearAssetBundle(string path, Dictionary<string, List<string>> bundleDic)
+        {
+            List<string> fileList = GetFiles(path, null, null);
+            HashSet<string> fileSet = new HashSet<string>(fileList);
+
+            foreach (string bundle in bundleDic.Keys)
+            {
+                fileSet.Remove($"{path}{bundle}");
+                fileSet.Remove($"{path}{bundle}{MANIFEST_SUFFIX}");
+            }
+
+            fileSet.Remove($"{path}{BUNDLE_FOLDER}");
+            fileSet.Remove($"{path}{BUNDLE_FOLDER}{MANIFEST_SUFFIX}");
+
+            Parallel.ForEach(fileSet, ParallelOptions, File.Delete);
         }
 
         /// <summary>
@@ -441,7 +539,7 @@ namespace ResourceFramework
         /// <returns>文件列表</returns>
         public static List<string> GetFiles(string path, string prefix, params string[] suffixes)
         {
-            string[] files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(path, $"*.*", SearchOption.AllDirectories);
             List<string> result = new List<string>(files.Length);
 
             for (int i = 0; i < files.Length; ++i)
@@ -457,7 +555,7 @@ namespace ResourceFramework
                 {
                     bool exist = false;
 
-                    for (int ii = 0; ii < suffixes.Length; i++)
+                    for (int ii = 0; ii < suffixes.Length; ii++)
                     {
                         string suffix = suffixes[ii];
                         if (file.EndsWith(suffix, StringComparison.InvariantCulture))

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Xml.Serialization;
+using UnityEditor;
 
 namespace ResourceFramework
 {
@@ -68,6 +69,8 @@ namespace ResourceFramework
         /// <returns>文件列表</returns>
         public HashSet<string> Collect()
         {
+            EditorUtility.DisplayProgressBar($"{nameof(Collect)}", "搜集打包设置资源", 0);
+
             HashSet<string> files = new HashSet<string>();
 
             for (int i = 0; i < items.Count; i++)
@@ -78,7 +81,11 @@ namespace ResourceFramework
                 {
                     files.Add(tempFiles[ii]);
                 }
+
+                EditorUtility.DisplayProgressBar($"{nameof(Collect)}", "搜集打包设置资源", (float)(i + 1) / items.Count);
             }
+
+            EditorUtility.ClearProgressBar();
 
             return files;
         }
@@ -131,13 +138,13 @@ namespace ResourceFramework
             switch (buildItem.bundleType)
             {
                 case EBundleType.All:
-                    name = $"{buildItem.assetPath.Substring(0, buildItem.assetPath.LastIndexOf('/'))}{Builder.ASSET_BUNDLE}".ToLowerInvariant();
+                    name = $"{buildItem.assetPath.Substring(0, buildItem.assetPath.LastIndexOf('/'))}{Builder.BUNDLE_SUFFIX}".ToLowerInvariant();
                     break;
                 case EBundleType.Directory:
-                    name = $"{assetUrl.Substring(0, assetUrl.LastIndexOf('/'))}{Builder.ASSET_BUNDLE}".ToLowerInvariant();
+                    name = $"{assetUrl.Substring(0, assetUrl.LastIndexOf('/'))}{Builder.BUNDLE_SUFFIX}".ToLowerInvariant();
                     break;
                 case EBundleType.File:
-                    name = $"{assetUrl}{Builder.ASSET_BUNDLE}".ToLowerInvariant();
+                    name = $"{assetUrl}{Builder.BUNDLE_SUFFIX}".ToLowerInvariant();
                     break;
                 default:
                     throw new Exception($"无法获取{assetUrl}的BundleName");

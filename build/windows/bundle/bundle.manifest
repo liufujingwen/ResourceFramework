@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 1048297191
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: assets/assetbundle/atlas/bear.ab
+      Dependencies: {}
+    Info_1:
+      Name: assets/assetbundle/background/background_01.jpg.ab
+      Dependencies: {}
+    Info_2:
+      Name: assets/assetbundle/background/background_02.jpg.ab
+      Dependencies: {}
+    Info_3:
+      Name: assets/assetbundle/icon.ab
+      Dependencies: {}
+    Info_4:
+      Name: assets/assetbundle/model/gebulin.ab
+      Dependencies: {}

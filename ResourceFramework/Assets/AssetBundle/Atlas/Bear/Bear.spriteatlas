@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Bear
+  m_EditorData:
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingParameters:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 1f56581bf56681044bd0e1752ff5805d, type: 3}
+    totalSpriteSurfaceArea: 1306624
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: a3daadfc3165fc94f87afbd9fb24bea9, type: 3}
+  - {fileID: 21300000, guid: b74043d1409f5c844a6c305da8d34d91, type: 3}
+  - {fileID: 21300000, guid: a7d366ab0d84cfe4bb1993e0fdb1b64d, type: 3}
+  - {fileID: 21300000, guid: c770f5dc097d90b4b840e9ef75de99f3, type: 3}
+  - {fileID: 21300000, guid: b2c37fcd95b53484ca555f8bf66d7505, type: 3}
+  - {fileID: 21300000, guid: f627070bb773da5459769181bd6d1ffc, type: 3}
+  - {fileID: 21300000, guid: 848ecb8668d363141a0afb0a06d6227a, type: 3}
+  - {fileID: 21300000, guid: 2bd3d801861f9224caced6465089884a, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Bear_1
+  - Bear_5
+  - Bear_3
+  - Bear_4
+  - Bear_2
+  - Bear_8
+  - Bear_6
+  - Bear_7
+  m_Tag: Bear
+  m_IsVariant: 0

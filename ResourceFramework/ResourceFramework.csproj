@@ -12,16 +12,13 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.4.32f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
@@ -262,18 +259,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Demo\Demo.cs" />
     <Compile Include="Assets\ResourceFramework\Bundle\ABundle.cs" />
     <Compile Include="Assets\ResourceFramework\Bundle\ABundleAsync.cs" />
     <Compile Include="Assets\ResourceFramework\Bundle\Bundle.cs" />
     <Compile Include="Assets\ResourceFramework\Bundle\BundleAsync.cs" />
     <Compile Include="Assets\ResourceFramework\Bundle\BundleManager.cs" />
-    <Compile Include="Assets\ResourceFramework\ResourceManifest.cs" />
     <Compile Include="Assets\ResourceFramework\Resource\AResource.cs" />
     <Compile Include="Assets\ResourceFramework\Resource\AResourceAsync.cs" />
     <Compile Include="Assets\ResourceFramework\Resource\EditorResource.cs" />
     <Compile Include="Assets\ResourceFramework\Resource\Resource.cs" />
     <Compile Include="Assets\ResourceFramework\Resource\ResourceAsync.cs" />
     <Compile Include="Assets\ResourceFramework\Resource\ResourceManager.cs" />
+    <Compile Include="Assets\ResourceFramework\ResourceManifest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\AssetBundle\Shader\DoubleSided.shader" />
+    <None Include="Assets\Temp\Bundle.txt" />
+    <None Include="Assets\Temp\Dependency.txt" />
+    <None Include="Assets\Temp\Resource.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

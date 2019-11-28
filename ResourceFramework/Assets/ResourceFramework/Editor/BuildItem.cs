@@ -19,7 +19,7 @@ namespace ResourceFramework
         public string suffix { get; set; } = ".prefab";
 
         [XmlIgnore]
-        public List<string> suffixes { get; set; }
+        public List<string> suffixes { get; set; } = new List<string>();
 
         //匹配该打包设置的个数
         [XmlIgnore]

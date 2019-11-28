@@ -326,6 +326,12 @@
     <Compile Include="Assets\ResourceFramework\Editor\EReferenceType.cs" />
     <Compile Include="Assets\ResourceFramework\Editor\XmlUtility.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\AssetBundle\Shader\DoubleSided.shader" />
+    <None Include="Assets\Temp\Bundle.txt" />
+    <None Include="Assets\Temp\Dependency.txt" />
+    <None Include="Assets\Temp\Resource.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
 </Project>

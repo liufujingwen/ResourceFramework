@@ -1,9 +1,6 @@
-﻿#if UNITY_EDITOR
-
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEditor;
 using Object = UnityEngine.Object;
 
 namespace ResourceFramework
@@ -27,7 +24,9 @@ namespace ResourceFramework
         /// </summary>
         internal override void LoadAsset()
         {
-            asset = AssetDatabase.LoadAssetAtPath<Object>(url);
+#if UNITY_EDITOR
+            asset = UnityEditor.AssetDatabase.LoadAssetAtPath<Object>(url);
+#endif
             done = true;
             loadTask.SetResult(this);
         }
@@ -47,5 +46,3 @@ namespace ResourceFramework
         }
     }
 }
-
-#endif
