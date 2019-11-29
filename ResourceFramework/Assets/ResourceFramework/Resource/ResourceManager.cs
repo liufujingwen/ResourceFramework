@@ -188,6 +188,10 @@ namespace ResourceFramework
 
             int lastIndex = m_NeedUnloadList.Count - 1;
             AResource resource = m_NeedUnloadList[lastIndex];
+
+            if (now < resource.destroyTime)
+                return;
+
             m_NeedUnloadList.RemoveAt(lastIndex);
             resource.UnLoad();
 

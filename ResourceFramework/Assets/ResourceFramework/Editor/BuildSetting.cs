@@ -97,13 +97,13 @@ namespace ResourceFramework
         /// <returns>打包选项</returns>
         public BuildItem GetBuildItem(string assetUrl)
         {
-            string extension = Path.GetExtension(assetUrl).ToLower();
+            string extension = Path.GetExtension(assetUrl);
 
             for (int i = 0; i < items.Count; ++i)
             {
                 BuildItem item = items[i];
                 //前面是否匹配
-                if (assetUrl.StartsWith(item.assetPath))
+                if (assetUrl.StartsWith(item.assetPath, StringComparison.InvariantCulture))
                 {
                     //后缀是否匹配
                     for (int ii = 0; ii < item.suffixes.Count; ii++)
