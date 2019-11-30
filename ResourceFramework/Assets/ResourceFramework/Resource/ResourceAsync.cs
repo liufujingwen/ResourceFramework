@@ -37,7 +37,11 @@ namespace ResourceFramework
             if (bundle != null)
                 throw new Exception($"{nameof(Resource)}.{nameof(Load)}() {nameof(bundle)} not null.");
 
-            bundle = BundleManager.instance.LoadAsync(url);
+            string bundleUrl = null;
+            if (!ResourceManager.instance.ResourceBunldeDic.TryGetValue(url, out bundleUrl))
+                throw new Exception($"{nameof(ResourceAsync)}.{nameof(Load)}() {nameof(bundleUrl)} is null.");
+
+            bundle = BundleManager.instance.LoadAsync(bundleUrl);
             loadTask = new TaskCompletionSource<AResource>();
         }
 

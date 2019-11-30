@@ -20,9 +20,11 @@ namespace ResourceFramework
 #endif
         //bundle后缀
         public const string BUNDLE_SUFFIX = ".ab";
-        public const string MANIFEST_SUFFIX = ".manifest";
+        public const string BUNDLE_MANIFEST_SUFFIX = ".manifest";
         //bundle文件夹名称
         public const string BUNDLE_FOLDER = "bundle";
+        //bundle描述文件名称
+        public const string MANIFEST = "manifest";
 
         public static readonly ParallelOptions ParallelOptions = new ParallelOptions()
         {
@@ -42,12 +44,17 @@ namespace ResourceFramework
         /// <summary>
         /// 打包配置
         /// </summary>
-        public readonly static string BuildSettingPath = Path.GetFullPath("../BuildSetting.xml").Replace("\\", "/");
+        public readonly static string BuildSettingPath = Path.GetFullPath("BuildSetting.xml").Replace("\\", "/");
 
         /// <summary>
         /// 临时目录,临时生成的文件都统一放在该目录
         /// </summary>
-        public readonly static string TempPath = Path.Combine(Application.dataPath, "Temp").Replace("\\", "/");
+        public readonly static string TempPath = Path.GetFullPath(Path.Combine(Application.dataPath, "Temp")).Replace("\\", "/");
+
+        /// <summary>
+        /// 临时目录,临时文件的ab包都放在该文件夹，打包完成后会移除
+        /// </summary>
+        public readonly static string TempBuildPath = Path.GetFullPath(Path.Combine(Application.dataPath, "../TempBuild")).Replace("\\", "/");
 
         /// <summary>
         /// 资源描述__文本
@@ -77,7 +84,7 @@ namespace ResourceFramework
         /// <summary>
         /// 资源依赖描述__文本
         /// </summary>
-        public readonly static string DependencyPath_Binary = $"{TempPath}/Dependency.txt";
+        public readonly static string DependencyPath_Binary = $"{TempPath}/Dependency.bytes";
 
         /// <summary>
         /// 打包目录
@@ -158,6 +165,8 @@ namespace ResourceFramework
             BuildBundle(bundleDic);
             //清空多余文件
             ClearAssetBundle(buildPath, bundleDic);
+            //把描述文件打包bundle
+            BuildManifest();
         }
 
         /// <summary>
@@ -291,6 +300,16 @@ namespace ResourceFramework
             }
 
             //todo...  外部资源
+            if (externalList.Count > 0)
+            {
+                string massage = string.Empty;
+                for (int i = 0; i < externalList.Count; i++)
+                {
+                    massage += "\n" + externalList[i];
+                }
+                EditorUtility.ClearProgressBar();
+                throw new Exception($"存在外部资源{massage}");
+            }
 
             //排序
             foreach (List<string> list in bundleDic.Values)
@@ -427,23 +446,26 @@ namespace ResourceFramework
                 MemoryStream dependencyMs = new MemoryStream();
                 BinaryWriter dependencyBw = new BinaryWriter(dependencyMs);
 
-                //用于保存资源依赖关系
-                List<ushort> ids = new List<ushort>();
-                //写入资源个数
-                dependencyBw.Write((ushort)dependencyDic.Count);
+                //用于保存资源依赖链
+                List<List<ushort>> dependencyList = new List<List<ushort>>();
                 foreach (var kv in dependencyDic)
                 {
-                    string assetUrl = kv.Key;
                     List<string> dependencyAssets = kv.Value;
 
-                    ids.Clear();
+                    //依赖为0的不需要写入
+                    if (dependencyAssets.Count == 0)
+                        continue;
+
+                    string assetUrl = kv.Key;
+
+                    List<ushort> ids = new List<ushort>();
                     ids.Add(assetIdDic[assetUrl]);
 
                     string content = assetUrl;
                     for (int i = 0; i < dependencyAssets.Count; i++)
                     {
                         string dependencyAssetUrl = dependencyAssets[i];
-                        content += $"\tdependencyAssetUrl";
+                        content += $"\t{dependencyAssetUrl}";
                         ids.Add(assetIdDic[dependencyAssetUrl]);
                     }
 
@@ -454,8 +476,19 @@ namespace ResourceFramework
                         EditorUtility.ClearProgressBar();
                         throw new Exception($"资源{assetUrl}的依赖超出一个字节上限:{byte.MaxValue}");
                     }
-                    for (int i = 0; i < ids.Count; i++)
-                        dependencyBw.Write(ids[i]);
+
+                    dependencyList.Add(ids);
+                }
+
+                //写入依赖链个数
+                dependencyBw.Write((ushort)dependencyList.Count);
+                for (int i = 0; i < dependencyList.Count; i++)
+                {
+                    //写入资源数
+                    List<ushort> ids = dependencyList[i];
+                    dependencyBw.Write((ushort)ids.Count);
+                    for (int ii = 0; ii < ids.Count; ii++)
+                        dependencyBw.Write(ids[ii]);
                 }
 
                 dependencyMs.Flush();
@@ -485,6 +518,43 @@ namespace ResourceFramework
 
             AssetBundleManifest manifest = BuildPipeline.BuildAssetBundles(buildPath, GetBuilds(bundleDic), BuildAssetBundleOptions, EditorUserBuildSettings.activeBuildTarget);
             return manifest;
+        }
+
+        /// <summary>
+        /// 把Resource.bytes、bundle.bytes、Dependency.bytes 打包assetbundle
+        /// </summary>
+        private static void BuildManifest()
+        {
+            if (!Directory.Exists(TempBuildPath))
+                Directory.CreateDirectory(TempBuildPath);
+
+            string prefix = Application.dataPath.Replace("/Assets", "/").Replace("\\", "/");
+
+            AssetBundleBuild manifest = new AssetBundleBuild();
+            manifest.assetBundleName = $"{MANIFEST}{BUNDLE_SUFFIX}";
+            manifest.assetNames = new string[3]
+            {
+                ResourcePath_Binary.Replace(prefix,""),
+                BundlePath_Binary.Replace(prefix,""),
+                DependencyPath_Binary.Replace(prefix,""),
+            };
+
+            AssetBundleManifest assetBundleManifest = BuildPipeline.BuildAssetBundles(TempBuildPath, new AssetBundleBuild[] { manifest }, BuildAssetBundleOptions, EditorUserBuildSettings.activeBuildTarget);
+
+            //把文件copy到build目录
+            if (assetBundleManifest)
+            {
+                string manifestFile = $"{TempBuildPath}/{MANIFEST}{BUNDLE_SUFFIX}";
+                string target = $"{buildPath}/{MANIFEST}{BUNDLE_SUFFIX}";
+                if (File.Exists(manifestFile))
+                {
+                    File.Copy(manifestFile, target);
+                }
+            }
+
+            //删除临时目录
+            if (Directory.Exists(TempBuildPath))
+                Directory.Delete(TempBuildPath, true);
         }
 
         /// <summary>
@@ -521,11 +591,11 @@ namespace ResourceFramework
             foreach (string bundle in bundleDic.Keys)
             {
                 fileSet.Remove($"{path}{bundle}");
-                fileSet.Remove($"{path}{bundle}{MANIFEST_SUFFIX}");
+                fileSet.Remove($"{path}{bundle}{BUNDLE_MANIFEST_SUFFIX}");
             }
 
             fileSet.Remove($"{path}{BUNDLE_FOLDER}");
-            fileSet.Remove($"{path}{BUNDLE_FOLDER}{MANIFEST_SUFFIX}");
+            fileSet.Remove($"{path}{BUNDLE_FOLDER}{BUNDLE_MANIFEST_SUFFIX}");
 
             Parallel.ForEach(fileSet, ParallelOptions, File.Delete);
         }

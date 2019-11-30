@@ -12,7 +12,7 @@ namespace ResourceFramework
 
         internal BundleManager()
         {
-            completedTask.SetResult(true);
+            //completedTask.SetResult(true);
         }
 
         public static TaskCompletionSource<bool> completedTask = new TaskCompletionSource<bool>();
@@ -36,6 +36,17 @@ namespace ResourceFramework
         private List<ABundleAsync> m_AsyncList = new List<ABundleAsync>();
 
         /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="getFileCallback">获取资源真实路径回调</param>
+        /// <param name="offset">加载bundle偏移</param>
+        internal void Initialize(Func<string, string> getFileCallback, ulong offset)
+        {
+            m_GetFileCallback = getFileCallback;
+            this.offset = offset;
+        }
+
+        /// <summary>
         /// 获取bundle的绝对路径
         /// </summary>
         /// <param name="url"></param>
@@ -49,17 +60,6 @@ namespace ResourceFramework
 
             //交到外部处理
             return m_GetFileCallback.Invoke(url);
-        }
-
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        /// <param name="getFileCallback">获取资源真实路径回调</param>
-        /// <param name="offset">加载bundle偏移</param>
-        internal void Initialize(Func<string, string> getFileCallback, ulong offset)
-        {
-            m_GetFileCallback = getFileCallback;
-            this.offset = offset;
         }
 
         /// <summary>
@@ -112,6 +112,7 @@ namespace ResourceFramework
 
             m_BundleDic.Add(url, bundle);
             bundle.AddReference();
+            bundle.Load();
 
             return bundle;
         }

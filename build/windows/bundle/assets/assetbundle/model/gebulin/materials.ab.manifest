@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 2026411193
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 99c1290326dee325639a96b6ebce13cf
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6f165f44e4778b6c9d85e7a145a54cb1
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinFS_D.mat
+- Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinJZ_D.mat
+- Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinJS_D.mat
+- Assets/AssetBundle/Model/GeBuLin/Materials/Ms_Gebulin_D.mat
+- Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinZS_D.mat
+Dependencies:
+- D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/shader.ab
+- D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/model/gebulin/textures.ab

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1048297191
+CRC: 283324683
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -16,4 +16,24 @@ AssetBundleManifest:
       Dependencies: {}
     Info_4:
       Name: assets/assetbundle/model/gebulin.ab
+      Dependencies:
+        Dependency_0: assets/assetbundle/model/gebulin/materials.ab
+    Info_5:
+      Name: assets/assetbundle/shader.ab
+      Dependencies: {}
+    Info_6:
+      Name: assets/assetbundle/ui/testui.prefab.ab
+      Dependencies:
+        Dependency_0: assets/assetbundle/atlas/bear.ab
+        Dependency_1: assets/assetbundle/background/background_02.jpg.ab
+    Info_7:
+      Name: assets/assetbundle/ui/uiroot.prefab.ab
+      Dependencies: {}
+    Info_8:
+      Name: assets/assetbundle/model/gebulin/materials.ab
+      Dependencies:
+        Dependency_0: assets/assetbundle/shader.ab
+        Dependency_1: assets/assetbundle/model/gebulin/textures.ab
+    Info_9:
+      Name: assets/assetbundle/model/gebulin/textures.ab
       Dependencies: {}

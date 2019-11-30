@@ -27,11 +27,13 @@ namespace ResourceFramework
             }
 #endif
 
-            assetBundle = AssetBundle.LoadFromFile(url);
+            assetBundle = AssetBundle.LoadFromFile(file, 0, BundleManager.instance.offset);
 
             done = true;
 
-            loadBundleTask = BundleManager.completedTask;
+            loadBundleTask = new TaskCompletionSource<bool>();
+
+            loadBundleTask.SetResult(true);
         }
 
         /// <summary>

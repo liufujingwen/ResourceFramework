@@ -25,4 +25,23 @@ assets/assetbundle/icon.ab
 	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_49.png
 	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_62.png
 assets/assetbundle/model/gebulin.ab
+	Assets/AssetBundle/Model/GeBuLin/GeBuLin.FBX
 	Assets/AssetBundle/Model/GeBuLin/GeBuLin.prefab
+assets/assetbundle/shader.ab
+	Assets/AssetBundle/Shader/DoubleSided.shader
+assets/assetbundle/ui/testui.prefab.ab
+	Assets/AssetBundle/UI/TestUI.prefab
+assets/assetbundle/ui/uiroot.prefab.ab
+	Assets/AssetBundle/UI/UIRoot.prefab
+assets/assetbundle/model/gebulin/materials.ab
+	Assets/AssetBundle/Model/GeBuLin/Materials/Ms_Gebulin_D.mat
+	Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinFS_D.mat
+	Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinJS_D.mat
+	Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinJZ_D.mat
+	Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinZS_D.mat
+assets/assetbundle/model/gebulin/textures.ab
+	Assets/AssetBundle/Model/GeBuLin/Textures/Ms_Gebulin_D.tga
+	Assets/AssetBundle/Model/GeBuLin/Textures/Wea_GebulinFS_D.TGA
+	Assets/AssetBundle/Model/GeBuLin/Textures/Wea_GebulinJS_D.tga
+	Assets/AssetBundle/Model/GeBuLin/Textures/Wea_GebulinJZ_D.tga
+	Assets/AssetBundle/Model/GeBuLin/Textures/Wea_GebulinZS_D.TGA

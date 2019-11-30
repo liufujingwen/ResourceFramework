@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ResourceFramework
 {
+    
+
     public class ResourceManifest
     {
-
     }
+
+
 }

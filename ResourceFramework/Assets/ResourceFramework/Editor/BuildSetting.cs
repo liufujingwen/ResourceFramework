@@ -38,13 +38,13 @@ namespace ResourceFramework
             {
                 BuildItem buildItem = items[i];
 
-                //if (buildItem.bundleType == EBundleType.All || buildItem.bundleType == EBundleType.Directory)
-                //{
-                //    if (!Directory.Exists(buildItem.assetPath))
-                //    {
-                //        throw new Exception($"不存在资源路径:{buildItem.assetPath}");
-                //    }
-                //}
+                if (buildItem.bundleType == EBundleType.All || buildItem.bundleType == EBundleType.Directory)
+                {
+                    if (!Directory.Exists(buildItem.assetPath))
+                    {
+                        throw new Exception($"不存在资源路径:{buildItem.assetPath}");
+                    }
+                }
 
                 //处理后缀
                 string[] prefixes = buildItem.suffix.Split('|');
@@ -105,13 +105,7 @@ namespace ResourceFramework
                 //前面是否匹配
                 if (assetUrl.StartsWith(item.assetPath, StringComparison.InvariantCulture))
                 {
-                    //后缀是否匹配
-                    for (int ii = 0; ii < item.suffixes.Count; ii++)
-                    {
-                        string suffix = item.suffixes[ii];
-                        if (suffix == extension)
-                            return item;
-                    }
+                    return item;
                 }
             }
 

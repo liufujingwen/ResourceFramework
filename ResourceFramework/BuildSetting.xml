@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BuildSetting ProjectName="haru" BuildRoot="../build">
+  <BuildItem AssetPath="Assets/AssetBundle/Atlas/" BundleType="Directory" Suffix=".png|.spriteatlas" />
+  <BuildItem AssetPath="Assets/AssetBundle/Background/" BundleType="File" Suffix=".jpg" />
+  <BuildItem AssetPath="Assets/AssetBundle/Icon/" BundleType="Directory" Suffix=".png" />
+  <BuildItem AssetPath="Assets/AssetBundle/Model/" BundleType="Directory" Suffix=".prefab" />
+  <BuildItem AssetPath="Assets/AssetBundle/Shader/" BundleType="Directory" Suffix=".shader" />
+  <BuildItem AssetPath="Assets/AssetBundle/UI/" BundleType="File" Suffix=".prefab" />
+</BuildSetting>
