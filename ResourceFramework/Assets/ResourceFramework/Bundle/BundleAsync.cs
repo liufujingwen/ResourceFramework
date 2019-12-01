@@ -15,7 +15,7 @@ namespace ResourceFramework
         /// 异步bundle的AssetBundleCreateRequest
         /// </summary>
         private AssetBundleCreateRequest m_AssetBundleCreateRequest;
-        
+
         /// <summary>
         /// 加载AssetBundle
         /// </summary>
@@ -58,8 +58,9 @@ namespace ResourceFramework
         /// 加载资源
         /// </summary>
         /// <param name="name">资源名称</param>
+        /// <param name="type">资源Type</param>
         /// <returns>指定名字的资源</returns>
-        internal override Object LoadAsset(string name)
+        internal override Object LoadAsset(string name, Type type)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException($"{nameof(BundleAsync)}.{nameof(LoadAsset)}() name is null.");

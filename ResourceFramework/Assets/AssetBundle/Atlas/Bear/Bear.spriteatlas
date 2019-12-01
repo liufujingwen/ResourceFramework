@@ -21,11 +21,11 @@ SpriteAtlas:
     platformSettings: []
     packingParameters:
       serializedVersion: 2
-      padding: 4
+      padding: 2
       blockOffset: 1
       allowAlphaSplitting: 0
-      enableRotation: 1
-      enableTightPacking: 1
+      enableRotation: 0
+      enableTightPacking: 0
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 1f56581bf56681044bd0e1752ff5805d, type: 3}

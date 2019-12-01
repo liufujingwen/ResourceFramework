@@ -97,8 +97,6 @@ namespace ResourceFramework
         /// <returns>打包选项</returns>
         public BuildItem GetBuildItem(string assetUrl)
         {
-            string extension = Path.GetExtension(assetUrl);
-
             for (int i = 0; i < items.Count; ++i)
             {
                 BuildItem item = items[i];

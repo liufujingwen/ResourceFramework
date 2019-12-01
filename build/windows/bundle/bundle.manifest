@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 283324683
+CRC: 2619395021
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -26,6 +26,7 @@ AssetBundleManifest:
       Dependencies:
         Dependency_0: assets/assetbundle/atlas/bear.ab
         Dependency_1: assets/assetbundle/background/background_02.jpg.ab
+        Dependency_2: assets/assetbundle/icon.ab
     Info_7:
       Name: assets/assetbundle/ui/uiroot.prefab.ab
       Dependencies: {}

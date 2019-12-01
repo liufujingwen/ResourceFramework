@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -38,8 +39,9 @@ namespace ResourceFramework
         /// 加载资源
         /// </summary>
         /// <param name="name">资源名称</param>
+        /// <param name="type">资源Type</param>
         /// <returns>指定名字的资源</returns>
-        internal abstract Object LoadAsset(string name);
+        internal abstract Object LoadAsset(string name, Type type);
 
         /// <summary>
         /// 增加引用

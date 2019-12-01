@@ -23,7 +23,6 @@ assets/assetbundle/icon.ab
 	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_47.png
 	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_48.png
 	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_49.png
-	Assets/AssetBundle/Icon/INV_Weapon_Shortblade_62.png
 assets/assetbundle/model/gebulin.ab
 	Assets/AssetBundle/Model/GeBuLin/GeBuLin.FBX
 	Assets/AssetBundle/Model/GeBuLin/GeBuLin.prefab

@@ -500,6 +500,9 @@ namespace ResourceFramework
             }
             #endregion
 
+
+            AssetDatabase.Refresh();
+
             EditorUtility.DisplayProgressBar($"{nameof(GenerateManifest)}", "生成打包信息", 1);
 
             EditorUtility.ClearProgressBar();

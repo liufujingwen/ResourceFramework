@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace ResourceFramework
 {
@@ -55,7 +55,7 @@ namespace ResourceFramework
             if (bundle == null)
                 throw new Exception($"{nameof(Resource)}.{nameof(LoadAsset)}() {nameof(bundle)} is null.");
 
-            asset = bundle.LoadAsset(url);
+            asset = bundle.LoadAsset(url, typeof(Object));
 
             done = true;
 

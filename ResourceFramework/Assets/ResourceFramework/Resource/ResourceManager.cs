@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace ResourceFramework
 {
@@ -46,7 +47,7 @@ namespace ResourceFramework
         /// <summary>
         /// 使用AssetDataBase进行加载
         /// </summary>
-        private bool m_Editor = true;
+        private bool m_Editor = false;
 
         /// <summary>
         /// 当前游戏运行时间，单位（毫秒）
