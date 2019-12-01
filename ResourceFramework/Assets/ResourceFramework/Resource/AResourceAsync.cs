@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ResourceFramework
+﻿namespace ResourceFramework
 {
     internal abstract class AResourceAsync : AResource
     {

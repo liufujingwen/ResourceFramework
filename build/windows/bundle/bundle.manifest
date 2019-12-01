@@ -1,40 +1,48 @@
 ManifestFileVersion: 0
-CRC: 2444198192
+CRC: 4256654532
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: assets/assetbundle/atlas/bear.ab
+      Name: assets/assetbundle/common/model.rendertexture.ab
       Dependencies: {}
     Info_1:
-      Name: assets/assetbundle/background/background_01.jpg.ab
+      Name: assets/assetbundle/atlas/bear.ab
       Dependencies: {}
     Info_2:
-      Name: assets/assetbundle/background/background_02.jpg.ab
+      Name: assets/assetbundle/background/background_01.jpg.ab
       Dependencies: {}
     Info_3:
-      Name: assets/assetbundle/icon.ab
+      Name: assets/assetbundle/background/background_02.jpg.ab
       Dependencies: {}
     Info_4:
+      Name: assets/assetbundle/icon.ab
+      Dependencies: {}
+    Info_5:
       Name: assets/assetbundle/model/gebulin.ab
       Dependencies:
         Dependency_0: assets/assetbundle/model/gebulin/materials.ab
-    Info_5:
+        Dependency_1: assets/assetbundle/model/gebulin/animations.ab
+    Info_6:
       Name: assets/assetbundle/shader.ab
       Dependencies: {}
-    Info_6:
+    Info_7:
       Name: assets/assetbundle/ui/testui.prefab.ab
       Dependencies:
-        Dependency_0: assets/assetbundle/atlas/bear.ab
-        Dependency_1: assets/assetbundle/background/background_02.jpg.ab
-        Dependency_2: assets/assetbundle/icon.ab
-    Info_7:
+        Dependency_0: assets/assetbundle/common/model.rendertexture.ab
+        Dependency_1: assets/assetbundle/atlas/bear.ab
+        Dependency_2: assets/assetbundle/background/background_02.jpg.ab
+        Dependency_3: assets/assetbundle/icon.ab
+    Info_8:
       Name: assets/assetbundle/ui/uiroot.prefab.ab
       Dependencies: {}
-    Info_8:
+    Info_9:
       Name: assets/assetbundle/model/gebulin/materials.ab
       Dependencies:
         Dependency_0: assets/assetbundle/shader.ab
         Dependency_1: assets/assetbundle/model/gebulin/textures.ab
-    Info_9:
+    Info_10:
+      Name: assets/assetbundle/model/gebulin/animations.ab
+      Dependencies: {}
+    Info_11:
       Name: assets/assetbundle/model/gebulin/textures.ab
       Dependencies: {}

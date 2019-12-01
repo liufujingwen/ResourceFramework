@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -96,16 +95,17 @@ namespace ResourceFramework
         /// <summary>
         /// 增加引用
         /// </summary>
-        public void AddReference()
+        internal void AddReference()
         {
             ++reference;
+            Debug.LogError("AddReference:" + reference + "  " + url);
             destroyTime = 0;
         }
 
         /// <summary>
         /// 减少引用
         /// </summary>
-        public void ReduceReference()
+        internal void ReduceReference()
         {
             --reference;
 
@@ -113,6 +113,8 @@ namespace ResourceFramework
             {
                 throw new System.Exception($"{GetType()}.{nameof(ReduceReference)}() less than 0,{nameof(url)}:{url}.");
             }
+
+            Debug.LogError("ReduceReference:" + reference + "  " + url);
 
             if (reference == 0)
             {

@@ -41,7 +41,7 @@ namespace ResourceFramework
                 asset = null;
             }
 
-            bundle.ReduceReference();
+            BundleManager.instance.UnLoad(bundle);
             bundle = null;
             awaiter = null;
             finishedCallback = null;

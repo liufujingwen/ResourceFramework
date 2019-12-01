@@ -1,5 +1,3 @@
-D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_obj\Debug\ResourceFramework.csprojAssemblyReference.cache
-D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_obj\Debug\ResourceFramework.csproj.CoreCompileInputs.cache
 D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
 D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
 D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_bin\Debug\nunit.framework.dll
@@ -135,6 +133,7 @@ D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_bin\Debug\UnityEngi
 D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_bin\Debug\UnityEngine.GoogleAudioSpatializer.xml
 D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_bin\Debug\UnityEngine.HoloLens.xml
 D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_bin\Debug\UnityEngine.SpatialTracking.xml
+D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_obj\Debug\ResourceFramework.csproj.CoreCompileInputs.cache
 D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_obj\Debug\ResourceFramework.csproj.CopyComplete
 D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_obj\Debug\Assembly-CSharp.dll
 D:\Projects\ResourceFramework\ResourceFramework\Temp\UnityVS_obj\Debug\Assembly-CSharp.pdb

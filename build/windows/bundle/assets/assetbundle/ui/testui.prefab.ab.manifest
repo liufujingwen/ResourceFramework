@@ -1,21 +1,27 @@
 ManifestFileVersion: 0
-CRC: 658619258
+CRC: 2261995686
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3633396071af94d67369d1b97046c71c
+    Hash: 9ae7ff8a3bdb73ee9e9a05f78713bd27
   TypeTreeHash:
     serializedVersion: 2
-    Hash: cc098ca813b594a00ac1cf4b7606ea2b
+    Hash: fc66e748fe7765fa2538729f38963e6a
 HashAppended: 0
 ClassTypes:
 - Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 20
   Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
 - Class: 28
   Script: {instanceID: 0}
 - Class: 48
+  Script: {instanceID: 0}
+- Class: 84
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -33,6 +39,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: e1a0cd845b439b44e80c0da2eb891823, type: 3}
 - Class: 115
   Script: {instanceID: 0}
+- Class: 124
+  Script: {instanceID: 0}
 - Class: 128
   Script: {instanceID: 0}
 - Class: 213
@@ -46,6 +54,7 @@ ClassTypes:
 Assets:
 - Assets/AssetBundle/UI/TestUI.prefab
 Dependencies:
+- D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/common/model.rendertexture.ab
 - D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/atlas/bear.ab
 - D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/background/background_02.jpg.ab
 - D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/icon.ab

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -108,7 +107,7 @@ namespace ResourceFramework
             }
 
             m_AssetBundleRequest = null;
-            bundle.ReduceReference();
+            BundleManager.instance.UnLoad(bundle);
             bundle = null;
             awaiter = null;
             finishedCallback = null;

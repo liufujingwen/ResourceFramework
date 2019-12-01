@@ -1,12 +1,9 @@
 ﻿using ResourceFramework;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TestUI : MonoBehaviour
 {
-    [SerializeField]
     private string[] m_Backgrounds = new string[]
     {
         "Assets/AssetBundle/Background/Background_01.jpg",
@@ -14,7 +11,6 @@ public class TestUI : MonoBehaviour
     };
 
 
-    [SerializeField]
     private string[] m_Bears = new string[]
     {
         "Assets/AssetBundle/Atlas/Bear/Bear_1.png",
@@ -27,7 +23,6 @@ public class TestUI : MonoBehaviour
         "Assets/AssetBundle/Atlas/Bear/Bear_8.png",
     };
 
-    [SerializeField]
     private string[] m_Icons = new string[]
     {
         "Assets/AssetBundle/Icon/INV_Weapon_Shortblade_40.png",
@@ -42,12 +37,18 @@ public class TestUI : MonoBehaviour
         "Assets/AssetBundle/Icon/INV_Weapon_Shortblade_49.png",
     };
 
+    private string m_ModelUrl = "Assets/AssetBundle/Model/GeBuLin/GeBuLin.prefab";
     [SerializeField]
-    private RawImage m_RawImage_Background;
+    private Transform m_ModelRoot;
+    private GameObject m_ModelGO;
+    private AResource m_ModelResource;
+
     [SerializeField]
-    private Image m_Image_Bear;
+    private RawImage m_RawImage_Background = null;
     [SerializeField]
-    private RawImage m_RawImage_Icon;
+    private Image m_Image_Bear = null;
+    [SerializeField]
+    private RawImage m_RawImage_Icon = null;
 
     private int m_BackgourndIndex = -1;
     private int m_BearIndex = -1;
@@ -116,5 +117,38 @@ public class TestUI : MonoBehaviour
         //同步加载icon
         AResource resource = ResourceManager.instance.Load(iconUrl, false, 0);
         m_RawImage_Icon.texture = resource.asset as Texture;
+    }
+
+    /// <summary>
+    /// 加载模型
+    /// </summary>
+    public void OnLoadModel()
+    {
+        if (m_ModelResource != null)
+            return;
+
+        //同步加载熊的sprite
+        m_ModelResource = ResourceManager.instance.Load(m_ModelUrl, false, 0);
+        m_ModelGO = Instantiate(m_ModelResource.asset, m_ModelRoot, false) as GameObject;
+        m_ModelGO.transform.eulerAngles = new Vector3(0, 180, 0);
+    }
+
+    /// <summary>
+    /// 卸载模型
+    /// </summary>
+    public void OnUnloadModel()
+    {
+        if (m_ModelResource == null)
+            return;
+
+        ResourceManager.instance.Unload(m_ModelResource);
+        m_ModelResource = null;
+        if (m_ModelGO)
+        {
+            Destroy(m_ModelGO);
+            m_ModelGO = null;
+        }
+
+        Resources.UnloadUnusedAssets();
     }
 }

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2844283001
+CRC: 3371779917
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a205f18d81c36aa2721bbbd69d7c8a57
+    Hash: 390d03de6dadd944e4c9c1ec4a4feadf
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 964894c6c3477b577f14a63c14c1b2a2
+    Hash: c1a6d56ce643a7d56c3fcd4f6a7f7896
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -19,6 +19,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 90
   Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
 - Class: 95
   Script: {instanceID: 0}
 - Class: 137
@@ -28,3 +30,4 @@ Assets:
 - Assets/AssetBundle/Model/GeBuLin/GeBuLin.prefab
 Dependencies:
 - D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/model/gebulin/materials.ab
+- D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/model/gebulin/animations.ab

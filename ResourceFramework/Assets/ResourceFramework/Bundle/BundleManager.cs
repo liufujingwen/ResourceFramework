@@ -44,7 +44,7 @@ namespace ResourceFramework
         /// </summary>
         /// <param name="url"></param>
         /// <returns>bundle的绝对路径</returns>
-        internal string GetFileUrl( string url)
+        internal string GetFileUrl(string url)
         {
             if (m_GetFileCallback == null)
             {
@@ -121,6 +121,12 @@ namespace ResourceFramework
 
             //引用-1
             bundle.ReduceReference();
+
+            if (bundle.reference == 0)
+            {
+                m_BundleDic.Remove(bundle.url);
+                Debug.LogError("Release:" + bundle.url);
+            }
         }
 
         public void Update()

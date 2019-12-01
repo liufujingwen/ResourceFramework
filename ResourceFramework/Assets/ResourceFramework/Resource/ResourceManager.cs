@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace ResourceFramework
 {
@@ -268,17 +267,26 @@ namespace ResourceFramework
                 }
             }
 
-            resource.AddReference();
             resource.Load();
+            resource.AddReference();
 
             return resource;
+        }
+
+        /// <summary>
+        /// 释放资源
+        /// </summary>
+        /// <param name="resource"></param>
+        public void Unload(AResource resource)
+        {
+            resource?.ReduceReference();
         }
 
         /// <summary>
         /// 即将要释放的资源
         /// </summary>
         /// <param name="resource"></param>
-        public void WillUnload(AResource resource)
+        internal void WillUnload(AResource resource)
         {
             if (m_NeedUnloadList.Count == 0)
             {
@@ -335,6 +343,7 @@ namespace ResourceFramework
             if (now < resource.destroyTime)
                 return;
 
+            m_ResourceDic.Remove(resource.url);
             m_NeedUnloadList.RemoveAt(lastIndex);
             resource.UnLoad();
 
@@ -344,7 +353,7 @@ namespace ResourceFramework
                 for (int i = 0; i < resource.dependencies.Length; i++)
                 {
                     AResource temp = resource.dependencies[i];
-                    temp?.ReduceReference();
+                    Unload(temp);
                 }
             }
         }

@@ -1,4 +1,6 @@
-﻿assets/assetbundle/atlas/bear.ab
+﻿assets/assetbundle/common/model.rendertexture.ab
+	Assets/AssetBundle/Common/Model.renderTexture
+assets/assetbundle/atlas/bear.ab
 	Assets/AssetBundle/Atlas/Bear/Bear.spriteatlas
 	Assets/AssetBundle/Atlas/Bear/Bear_1.png
 	Assets/AssetBundle/Atlas/Bear/Bear_2.png
@@ -38,6 +40,26 @@ assets/assetbundle/model/gebulin/materials.ab
 	Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinJS_D.mat
 	Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinJZ_D.mat
 	Assets/AssetBundle/Model/GeBuLin/Materials/Wea_GebulinZS_D.mat
+assets/assetbundle/model/gebulin/animations.ab
+	Assets/AssetBundle/Model/GeBuLin/Animations/AirDead.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/AirHit.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/Attack.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/Diagup.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/Enter_01.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/Enter_02.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/Enter_03.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/GeBuLin.controller
+	Assets/AssetBundle/Model/GeBuLin/Animations/Guard.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/Idle.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/KnockBack.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/KnockOut.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/RunFront.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/Skill_01.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/StandDead.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/StandHit_01.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/StandHit_02.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/StandUp.anim
+	Assets/AssetBundle/Model/GeBuLin/Animations/WalkFront.anim
 assets/assetbundle/model/gebulin/textures.ab
 	Assets/AssetBundle/Model/GeBuLin/Textures/Ms_Gebulin_D.tga
 	Assets/AssetBundle/Model/GeBuLin/Textures/Wea_GebulinFS_D.TGA
