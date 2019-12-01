@@ -9,6 +9,11 @@ namespace ResourceFramework
     {
         public override bool keepWaiting => !done;
 
+        /// <summary>
+        /// 异步加载资源的AssetBundleRequest
+        /// </summary>
+        private AssetBundleRequest m_AssetBundleRequest;
+
         public override Object asset
         {
             get
@@ -47,14 +52,37 @@ namespace ResourceFramework
         }
 
         /// <summary>
+        /// 异步加载资源
+        /// </summary>
+        internal override void LoadAssetAsync()
+        {
+            if (bundle == null)
+                throw new Exception($"{nameof(ResourceAsync)}.{nameof(LoadAssetAsync)}() {nameof(bundle)} is null.");
+
+            if (bundle is BundleAsync)
+            {
+                BundleAsync bundleAsync = bundle as BundleAsync;
+                m_AssetBundleRequest = bundleAsync.LoadAssetAsync(url, typeof(Object));
+            }
+        }
+
+        /// <summary>
         /// 加载资源
         /// </summary>
         internal override void LoadAsset()
         {
             if (bundle == null)
-                throw new Exception($"{nameof(Resource)}.{nameof(LoadAsset)}() {nameof(bundle)} is null.");
+                throw new Exception($"{nameof(ResourceAsync)}.{nameof(LoadAsset)}() {nameof(bundle)} is null.");
 
-            asset = bundle.LoadAsset(url, typeof(Object));
+            if (m_AssetBundleRequest != null)
+            {
+                asset = m_AssetBundleRequest.asset;
+            }
+            else
+            {
+                asset = bundle.LoadAsset(url, typeof(Object));
+            }
+
             done = true;
 
             if (finishedCallback != null)
@@ -79,6 +107,7 @@ namespace ResourceFramework
                 asset = null;
             }
 
+            m_AssetBundleRequest = null;
             bundle.ReduceReference();
             bundle = null;
             awaiter = null;
@@ -100,6 +129,14 @@ namespace ResourceFramework
             }
 
             if (!bundle.done)
+                return false;
+
+            if (m_AssetBundleRequest == null)
+            {
+                LoadAssetAsync();
+            }
+
+            if (m_AssetBundleRequest != null && !m_AssetBundleRequest.isDone)
                 return false;
 
             LoadAsset();
