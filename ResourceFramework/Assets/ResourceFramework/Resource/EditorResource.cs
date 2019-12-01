@@ -7,7 +7,7 @@ namespace ResourceFramework
 {
     public class EditorResource : AResource
     {
-        public override bool keepWaiting => done;
+        public override bool keepWaiting => !done;
 
         /// <summary>
         /// 加载资源
@@ -29,6 +29,13 @@ namespace ResourceFramework
             asset = UnityEditor.AssetDatabase.LoadAssetAtPath<Object>(url);
 #endif
             done = true;
+
+            if (finishedCallback != null)
+            {
+                Action<AResource> tempCallback = finishedCallback;
+                finishedCallback = null;
+                tempCallback.Invoke(this);
+            }
         }
 
         /// <summary>
@@ -43,6 +50,8 @@ namespace ResourceFramework
             }
 
             asset = null;
+            awaiter = null;
+            finishedCallback = null;
         }
     }
 }

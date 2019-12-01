@@ -56,6 +56,13 @@ namespace ResourceFramework
 
             asset = bundle.LoadAsset(url);
             done = true;
+
+            if (finishedCallback != null)
+            {
+                Action<AResource> tempCallback = finishedCallback;
+                finishedCallback = null;
+                tempCallback.Invoke(this);
+            }
         }
 
         /// <summary>
@@ -75,6 +82,7 @@ namespace ResourceFramework
             bundle.ReduceReference();
             bundle = null;
             awaiter = null;
+            finishedCallback = null;
         }
 
         public override bool Update()

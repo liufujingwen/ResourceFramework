@@ -46,7 +46,7 @@ namespace ResourceFramework
         /// <summary>
         /// 使用AssetDataBase进行加载
         /// </summary>
-        private bool m_Editor = false;
+        private bool m_Editor = true;
 
         /// <summary>
         /// 当前游戏运行时间，单位（毫秒）
@@ -194,12 +194,17 @@ namespace ResourceFramework
         /// <param name="async">是否异步</param>
         /// <param name="delay">延迟释放时间</param>
         /// <param name="callback">加载完成回调</param>
-        public async void LoadWithCallback(string url, bool async, uint delay, Action<AResource> callback)
+        public void LoadWithCallback(string url, bool async, uint delay, Action<AResource> callback)
         {
-            Task<AResource> task = LoadTask(url,async,delay);
-            await task;
-            AResource resource = task.Result;
-            callback?.Invoke(resource);
+            AResource resource = LoadInternal(url, async, delay, false);
+            if (resource.done)
+            {
+                callback?.Invoke(resource);
+            }
+            else
+            {
+                resource.finishedCallback += callback;
+            }
         }
 
         /// <summary>

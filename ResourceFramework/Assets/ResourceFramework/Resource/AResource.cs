@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -48,6 +49,11 @@ namespace ResourceFramework
         /// awaiter
         /// </summary>
         internal ResourceAwaiter awaiter { get; set; }
+
+        /// <summary>
+        /// 加载完成回调
+        /// </summary>
+        internal Action<AResource> finishedCallback { get; set; }
 
         /// <summary>
         /// 加载资源
