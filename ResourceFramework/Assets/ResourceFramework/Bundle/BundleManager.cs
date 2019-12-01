@@ -10,13 +10,6 @@ namespace ResourceFramework
     {
         public readonly static BundleManager instance = new BundleManager();
 
-        internal BundleManager()
-        {
-            //completedTask.SetResult(true);
-        }
-
-        public static TaskCompletionSource<bool> completedTask = new TaskCompletionSource<bool>();
-
         /// <summary>
         /// 加载bundle开始的偏移
         /// </summary>

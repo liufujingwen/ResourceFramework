@@ -152,10 +152,39 @@ namespace ResourceFramework
         /// <param name="async">是否异步</param>
         /// <param name="delay">延迟释放时间</param>
         /// <returns> Task<AResource> </returns>
-        public Task<AResource> Load(string url, bool async, uint delay)
+        public AResource Load(string url, bool async, uint delay)
+        {
+            return LoadInternal(url, async, delay, false);
+        }
+
+        /// <summary>
+        /// 加载资源
+        /// </summary>
+        /// <param name="url">资源Url</param>
+        /// <param name="async">是否异步</param>
+        /// <param name="delay">延迟释放时间</param>
+        /// <returns></returns>
+        public Task<AResource> LoadTask(string url, bool async, uint delay)
         {
             AResource resource = LoadInternal(url, async, delay, false);
-            return resource.loadTask.Task;
+
+            if (resource.done)
+            {
+                if (resource.awaiter == null)
+                {
+                    resource.awaiter = new ResourceAwaiter(url);
+                    resource.awaiter.SetResult(resource);
+                }
+
+                return resource.awaiter.taskCompletionSource.Task;
+            }
+
+            if (resource.awaiter == null)
+            {
+                resource.awaiter = new ResourceAwaiter(url);
+            }
+
+            return resource.awaiter.taskCompletionSource.Task;
         }
 
         /// <summary>
@@ -165,11 +194,11 @@ namespace ResourceFramework
         /// <param name="async">是否异步</param>
         /// <param name="delay">延迟释放时间</param>
         /// <param name="callback">加载完成回调</param>
-        public async void Load(string url, bool async, uint delay, Action<AResource> callback)
+        public async void LoadWithCallback(string url, bool async, uint delay, Action<AResource> callback)
         {
-            AResource resource = LoadInternal(url, async, delay, false);
-            Task<AResource> task = resource.loadTask.Task;
+            Task<AResource> task = LoadTask(url,async,delay);
             await task;
+            AResource resource = task.Result;
             callback?.Invoke(resource);
         }
 
@@ -280,6 +309,11 @@ namespace ResourceFramework
                 {
                     m_AsyncList.RemoveAt(i);
                     i--;
+
+                    if (resourceAsync.awaiter != null)
+                    {
+                        resourceAsync.awaiter.SetResult(resourceAsync);
+                    }
                 }
             }
         }

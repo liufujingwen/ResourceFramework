@@ -6,6 +6,8 @@ namespace ResourceFramework
 {
     internal class Resource : AResource
     {
+        public override bool keepWaiting => !done;
+
         /// <summary>
         /// 加载资源
         /// </summary>
@@ -22,7 +24,6 @@ namespace ResourceFramework
                 throw new Exception($"{nameof(Resource)}.{nameof(Load)}() {nameof(bundleUrl)} is null.");
 
             bundle = BundleManager.instance.Load(bundleUrl);
-            loadTask = new TaskCompletionSource<AResource>();
             LoadAsset();
         }
 
@@ -42,6 +43,7 @@ namespace ResourceFramework
 
             bundle.ReduceReference();
             bundle = null;
+            awaiter = null;
         }
 
         /// <summary>
@@ -55,8 +57,6 @@ namespace ResourceFramework
             asset = bundle.LoadAsset(url);
 
             done = true;
-
-            loadTask.SetResult(this);
         }
     }
 }

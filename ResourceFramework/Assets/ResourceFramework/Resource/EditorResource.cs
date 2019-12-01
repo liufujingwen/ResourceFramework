@@ -7,6 +7,8 @@ namespace ResourceFramework
 {
     public class EditorResource : AResource
     {
+        public override bool keepWaiting => done;
+
         /// <summary>
         /// 加载资源
         /// </summary>
@@ -15,7 +17,6 @@ namespace ResourceFramework
             if (string.IsNullOrEmpty(url))
                 throw new ArgumentException($"{nameof(EditorResource)}.{nameof(Load)}() {nameof(url)} is null.");
 
-            loadTask = new TaskCompletionSource<AResource>();
             LoadAsset();
         }
 
@@ -28,7 +29,6 @@ namespace ResourceFramework
             asset = UnityEditor.AssetDatabase.LoadAssetAtPath<Object>(url);
 #endif
             done = true;
-            loadTask.SetResult(this);
         }
 
         /// <summary>

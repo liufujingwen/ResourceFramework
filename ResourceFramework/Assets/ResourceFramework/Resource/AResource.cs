@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace ResourceFramework
 {
-    public abstract class AResource
+    public abstract class AResource : CustomYieldInstruction
     {
         /// <summary>
         /// Asset对应的Url
@@ -44,6 +45,11 @@ namespace ResourceFramework
         internal bool done { get; set; }
 
         /// <summary>
+        /// awaiter
+        /// </summary>
+        internal ResourceAwaiter awaiter { get; set; }
+
+        /// <summary>
         /// 加载资源
         /// </summary>
         internal abstract void Load();
@@ -52,11 +58,6 @@ namespace ResourceFramework
         /// 卸载资源
         /// </summary>
         internal abstract void UnLoad();
-
-        /// <summary>
-        /// 加载Task
-        /// </summary>
-        public TaskCompletionSource<AResource> loadTask { get; protected set; }
 
         /// <summary>
         /// 加载资源

@@ -250,7 +250,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Demo\Demo.cs" />
+    <Compile Include="Assets\Demo\Demo_Await_Async\Demo_Await_Async.cs" />
+    <Compile Include="Assets\Demo\Demo_Callback\Demo_Callback.cs" />
+    <Compile Include="Assets\Demo\Demo_Coroutine\Demo_Coroutine.cs" />
+    <Compile Include="Assets\ResourceFramework\Awaiter\ResourceAwaiter.cs" />
     <Compile Include="Assets\ResourceFramework\Bundle\ABundle.cs" />
     <Compile Include="Assets\ResourceFramework\Bundle\ABundleAsync.cs" />
     <Compile Include="Assets\ResourceFramework\Bundle\Bundle.cs" />
@@ -262,7 +265,6 @@
     <Compile Include="Assets\ResourceFramework\Resource\Resource.cs" />
     <Compile Include="Assets\ResourceFramework\Resource\ResourceAsync.cs" />
     <Compile Include="Assets\ResourceFramework\Resource\ResourceManager.cs" />
-    <Compile Include="Assets\ResourceFramework\ResourceManifest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AssetBundle\Shader\DoubleSided.shader" />

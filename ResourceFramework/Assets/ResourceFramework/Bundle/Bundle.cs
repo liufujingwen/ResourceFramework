@@ -30,10 +30,6 @@ namespace ResourceFramework
             assetBundle = AssetBundle.LoadFromFile(file, 0, BundleManager.instance.offset);
 
             done = true;
-
-            loadBundleTask = new TaskCompletionSource<bool>();
-
-            loadBundleTask.SetResult(true);
         }
 
         /// <summary>

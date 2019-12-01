@@ -25,11 +25,6 @@ namespace ResourceFramework
         internal bool done { get; set; }
 
         /// <summary>
-        /// 加载bundle的task
-        /// </summary>
-        internal TaskCompletionSource<bool> loadBundleTask { get; set; }
-
-        /// <summary>
         /// 加载bundle
         /// </summary>
         internal abstract void Load();

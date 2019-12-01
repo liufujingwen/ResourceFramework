@@ -7,6 +7,8 @@ namespace ResourceFramework
 {
     internal class ResourceAsync : AResourceAsync
     {
+        public override bool keepWaiting => !done;
+
         public override Object asset
         {
             get
@@ -42,7 +44,6 @@ namespace ResourceFramework
                 throw new Exception($"{nameof(ResourceAsync)}.{nameof(Load)}() {nameof(bundleUrl)} is null.");
 
             bundle = BundleManager.instance.LoadAsync(bundleUrl);
-            loadTask = new TaskCompletionSource<AResource>();
         }
 
         /// <summary>
@@ -55,7 +56,6 @@ namespace ResourceFramework
 
             asset = bundle.LoadAsset(url);
             done = true;
-            loadTask.SetResult(this);
         }
 
         /// <summary>
@@ -74,6 +74,7 @@ namespace ResourceFramework
 
             bundle.ReduceReference();
             bundle = null;
+            awaiter = null;
         }
 
         public override bool Update()

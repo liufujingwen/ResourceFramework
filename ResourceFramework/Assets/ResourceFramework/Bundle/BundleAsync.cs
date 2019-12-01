@@ -15,7 +15,7 @@ namespace ResourceFramework
         /// 异步bundle的AssetBundleCreateRequest
         /// </summary>
         private AssetBundleCreateRequest m_AssetBundleCreateRequest;
-
+        
         /// <summary>
         /// 加载AssetBundle
         /// </summary>
@@ -35,9 +35,7 @@ namespace ResourceFramework
             }
 #endif
 
-            m_AssetBundleCreateRequest = AssetBundle.LoadFromFileAsync(url, 0, BundleManager.instance.offset);
-
-            loadBundleTask = new TaskCompletionSource<bool>();
+            m_AssetBundleCreateRequest = AssetBundle.LoadFromFileAsync(file, 0, BundleManager.instance.offset);
         }
 
         /// <summary>
@@ -53,7 +51,6 @@ namespace ResourceFramework
                 assetBundle = null;
                 url = null;
                 reference = 0;
-                loadBundleTask = null;
             }
         }
 
@@ -85,8 +82,8 @@ namespace ResourceFramework
                 return false;
 
             done = true;
+
             assetBundle = m_AssetBundleCreateRequest.assetBundle;
-            loadBundleTask.SetResult(true);
 
             if (reference == 0)
             {
