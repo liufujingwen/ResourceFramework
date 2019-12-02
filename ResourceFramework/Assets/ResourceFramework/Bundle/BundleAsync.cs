@@ -48,7 +48,6 @@ namespace ResourceFramework
                 done = false;
                 assetBundle.Unload(true);
                 assetBundle = null;
-                url = null;
                 reference = 0;
             }
         }

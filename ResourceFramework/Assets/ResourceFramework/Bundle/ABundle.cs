@@ -69,19 +69,7 @@ namespace ResourceFramework
 
             if (reference < 0)
             {
-                throw new System.Exception($"{GetType()}.{nameof(ReduceReference)}() less than 0,{nameof(url)}:{url}.");
-            }
-
-            //严格遵循要加载完了才能释放
-            if (!done)
-            {
-                return;
-            }
-
-            //引用为0,直接释放
-            if (reference == 0)
-            {
-                UnLoad();
+                throw new Exception($"{GetType()}.{nameof(ReduceReference)}() less than 0,{nameof(url)}:{url}.");
             }
         }
     }

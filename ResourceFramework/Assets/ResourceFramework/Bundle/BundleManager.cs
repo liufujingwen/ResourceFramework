@@ -119,9 +119,17 @@ namespace ResourceFramework
             //引用-1
             bundle.ReduceReference();
 
+            //引用为0,直接释放
             if (bundle.reference == 0)
             {
+                //严格遵循要加载完了才能释放
+                if (!bundle.done)
+                {
+                    return;
+                }
+
                 m_BundleDic.Remove(bundle.url);
+                bundle.UnLoad();
             }
         }
 

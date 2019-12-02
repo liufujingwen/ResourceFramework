@@ -148,7 +148,5 @@ public class TestUI : MonoBehaviour
             Destroy(m_ModelGO);
             m_ModelGO = null;
         }
-
-        Resources.UnloadUnusedAssets();
     }
 }
