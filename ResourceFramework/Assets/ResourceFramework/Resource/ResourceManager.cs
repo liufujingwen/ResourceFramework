@@ -263,12 +263,13 @@ namespace ResourceFramework
                 for (int i = 0; i < dependencies.Count; i++)
                 {
                     string dependencyUrl = dependencies[i];
-                    resource.dependencies[i] = LoadInternal(dependencyUrl, async, delay, true);
+                    AResource dependencyResource = LoadInternal(dependencyUrl, async, delay, true);
+                    resource.dependencies[i] = dependencyResource;
                 }
             }
 
-            resource.Load();
             resource.AddReference();
+            resource.Load();
 
             return resource;
         }
@@ -279,18 +280,32 @@ namespace ResourceFramework
         /// <param name="resource"></param>
         public void Unload(AResource resource)
         {
-            resource?.ReduceReference();
+            if (resource == null)
+            {
+                throw new ArgumentException($"{nameof(ResourceManager)}.{nameof(Unload)}() {nameof(resource)} is null.");
+            }
+
+            resource.ReduceReference();
+
+            if (resource.reference == 0)
+            {
+
+
+                resource.destroyTime = now + resource.delay;
+                WillUnload(resource);
+            }
         }
 
         /// <summary>
         /// 即将要释放的资源
         /// </summary>
         /// <param name="resource"></param>
-        internal void WillUnload(AResource resource)
+        private void WillUnload(AResource resource)
         {
             if (m_NeedUnloadList.Count == 0)
             {
                 m_NeedUnloadList.Add(resource);
+                return;
             }
 
             bool insertFlag = false;
@@ -306,7 +321,7 @@ namespace ResourceFramework
                 }
             }
 
-            if (insertFlag)
+            if (!insertFlag)
             {
                 m_NeedUnloadList.Add(resource);
             }
@@ -345,7 +360,6 @@ namespace ResourceFramework
 
             m_ResourceDic.Remove(resource.url);
             m_NeedUnloadList.RemoveAt(lastIndex);
-            resource.UnLoad();
 
             //依赖引用-1
             if (resource.dependencies != null)
@@ -356,6 +370,8 @@ namespace ResourceFramework
                     Unload(temp);
                 }
             }
+
+            resource.UnLoad();
         }
     }
 }

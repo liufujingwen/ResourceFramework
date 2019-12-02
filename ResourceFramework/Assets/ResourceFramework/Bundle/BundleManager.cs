@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 using System;
-using System.Threading.Tasks;
 
 namespace ResourceFramework
 {
@@ -125,7 +122,6 @@ namespace ResourceFramework
             if (bundle.reference == 0)
             {
                 m_BundleDic.Remove(bundle.url);
-                Debug.LogError("Release:" + bundle.url);
             }
         }
 

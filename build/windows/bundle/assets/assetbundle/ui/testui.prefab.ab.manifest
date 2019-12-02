@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2261995686
+CRC: 1138341216
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9ae7ff8a3bdb73ee9e9a05f78713bd27
+    Hash: 0d811ff12f99b4294d4a66e53dd8d5ae
   TypeTreeHash:
     serializedVersion: 2
     Hash: fc66e748fe7765fa2538729f38963e6a
@@ -54,7 +54,7 @@ ClassTypes:
 Assets:
 - Assets/AssetBundle/UI/TestUI.prefab
 Dependencies:
-- D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/common/model.rendertexture.ab
-- D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/atlas/bear.ab
-- D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/background/background_02.jpg.ab
-- D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/icon.ab
+- C:/D/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/common/model.rendertexture.ab
+- C:/D/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/atlas/bear.ab
+- C:/D/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/background/background_02.jpg.ab
+- C:/D/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/icon.ab

@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3371779917
+CRC: 1669624773
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 390d03de6dadd944e4c9c1ec4a4feadf
+    Hash: a809592b4ae99656ac428f290cd0aa1b
   TypeTreeHash:
     serializedVersion: 2
     Hash: c1a6d56ce643a7d56c3fcd4f6a7f7896
@@ -29,5 +29,5 @@ Assets:
 - Assets/AssetBundle/Model/GeBuLin/GeBuLin.FBX
 - Assets/AssetBundle/Model/GeBuLin/GeBuLin.prefab
 Dependencies:
-- D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/model/gebulin/materials.ab
-- D:/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/model/gebulin/animations.ab
+- C:/D/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/model/gebulin/materials.ab
+- C:/D/Projects/ResourceFramework/build/windows/bundle/assets/assetbundle/model/gebulin/animations.ab

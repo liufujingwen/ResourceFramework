@@ -98,7 +98,6 @@ namespace ResourceFramework
         internal void AddReference()
         {
             ++reference;
-            Debug.LogError("AddReference:" + reference + "  " + url);
             destroyTime = 0;
         }
 
@@ -111,15 +110,7 @@ namespace ResourceFramework
 
             if (reference < 0)
             {
-                throw new System.Exception($"{GetType()}.{nameof(ReduceReference)}() less than 0,{nameof(url)}:{url}.");
-            }
-
-            Debug.LogError("ReduceReference:" + reference + "  " + url);
-
-            if (reference == 0)
-            {
-                destroyTime = ResourceManager.instance.now + delay;
-                ResourceManager.instance.WillUnload(this);
+                throw new Exception($"{GetType()}.{nameof(ReduceReference)}() less than 0,{nameof(url)}:{url}.");
             }
         }
     }
