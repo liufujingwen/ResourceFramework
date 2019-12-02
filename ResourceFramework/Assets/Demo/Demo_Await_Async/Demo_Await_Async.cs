@@ -21,14 +21,14 @@ public class Demo_Await_Async : MonoBehaviour
 
     private async void Initialize()
     {
-        Task<AResource> uiResource = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/UIRoot.prefab", false, 0);
+        Task<AResource> uiResource = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/UIRoot.prefab", 0);
         await uiResource;
         GameObject uiRoot = Instantiate(uiResource.Result.asset) as GameObject;
         uiRoot.name = uiResource.Result.asset.name;
 
         Transform uiParent = GameObject.Find("Canvas").transform;
 
-        Task<AResource> testResource = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/TestUI.prefab", true, 0);
+        Task<AResource> testResource = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/TestUI.prefab", 0);
         await testResource;
         GameObject testUIGO = Instantiate(testResource.Result.asset, uiParent, false) as GameObject;
         testUIGO.name = testResource.Result.asset.name;

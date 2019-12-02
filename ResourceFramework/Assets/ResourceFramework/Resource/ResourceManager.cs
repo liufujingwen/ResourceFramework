@@ -158,15 +158,15 @@ namespace ResourceFramework
         }
 
         /// <summary>
-        /// 加载资源
+        /// 异步加载资源
         /// </summary>
         /// <param name="url">资源Url</param>
         /// <param name="async">是否异步</param>
         /// <param name="delay">延迟释放时间</param>
         /// <returns></returns>
-        public Task<AResource> LoadTask(string url, bool async, uint delay)
+        public Task<AResource> LoadTask(string url, uint delay)
         {
-            AResource resource = LoadInternal(url, async, delay, false);
+            AResource resource = LoadInternal(url, true, delay, false);
 
             if (resource.done)
             {
