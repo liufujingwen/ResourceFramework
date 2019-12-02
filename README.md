@@ -12,7 +12,7 @@ Unity AssetBundle
 //使用async-await加载  
 private async void Initialize()  
 {  
-        Task<AResource> task = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/UIRoot.prefab", 0);  
+        \tTask<AResource> task = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/UIRoot.prefab", 0);  
         await task;  
         GameObject uiRoot = Instantiate(task.Result.asset) as GameObject;  
         uiRoot.name = task.Result.asset.name;  
@@ -34,7 +34,7 @@ private void Initialize()
         {
                 GameObject uiRoot = Instantiate(resource.asset) as GameObject;  
                 uiRoot.name = resource.asset.name;  
-        });
+        });  
 }
 
 //使用同步加载  
