@@ -58,11 +58,7 @@ namespace ResourceFramework
             if (bundle == null)
                 throw new Exception($"{nameof(ResourceAsync)}.{nameof(LoadAssetAsync)}() {nameof(bundle)} is null.");
 
-            if (bundle is BundleAsync)
-            {
-                BundleAsync bundleAsync = bundle as BundleAsync;
-                m_AssetBundleRequest = bundleAsync.LoadAssetAsync(url, typeof(Object));
-            }
+            m_AssetBundleRequest = bundle.LoadAssetAsync(url, typeof(Object));
         }
 
         /// <summary>

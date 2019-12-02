@@ -46,6 +46,23 @@ namespace ResourceFramework
         }
 
         /// <summary>
+        /// 异步加载资源
+        /// </summary>
+        /// <param name="name">资源名称</param>
+        /// <param name="type">资源Type</param>
+        /// <returns>AssetBundleRequest</returns>
+        internal override AssetBundleRequest LoadAssetAsync(string name, Type type)
+        {
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentException($"{nameof(Bundle)}.{nameof(LoadAssetAsync)}() name is null.");
+
+            if (assetBundle == null)
+                throw new NullReferenceException($"{nameof(Bundle)}.{nameof(LoadAssetAsync)}() Bundle is null.");
+
+            return assetBundle.LoadAssetAsync(name, type);
+        }
+
+        /// <summary>
         /// 加载资源
         /// </summary>
         /// <param name="name">资源名称</param>

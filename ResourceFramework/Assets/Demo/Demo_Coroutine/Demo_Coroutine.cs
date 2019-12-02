@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using ResourceFramework;
 using System.IO;
-using System.Threading.Tasks;
 using System.Collections;
 
 public class Demo_Coroutine : MonoBehaviour
@@ -10,7 +9,6 @@ public class Demo_Coroutine : MonoBehaviour
     private string PrefixPath { get; set; }
     private string Platform { get; set; }
 
-    // Use this for initialization
     private void Start()
     {
         Platform = GetPlatform();
@@ -57,7 +55,6 @@ public class Demo_Coroutine : MonoBehaviour
         return $"{PrefixPath}/{assetUrl}";
     }
 
-    // Update is called once per frame
     void Update()
     {
         ResourceManager.instance.Update();

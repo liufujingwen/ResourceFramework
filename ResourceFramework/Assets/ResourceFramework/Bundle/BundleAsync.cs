@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -91,7 +90,7 @@ namespace ResourceFramework
             if (assetBundle == null)
                 assetBundle = m_AssetBundleCreateRequest.assetBundle;
 
-            return assetBundle.LoadAsset(name);
+            return assetBundle.LoadAsset(name, type);
         }
 
         internal override bool Update()
@@ -113,7 +112,5 @@ namespace ResourceFramework
 
             return true;
         }
-
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -34,6 +33,14 @@ namespace ResourceFramework
         /// 卸载bundle
         /// </summary>
         internal abstract void UnLoad();
+
+        /// <summary>
+        /// 异步加载资源
+        /// </summary>
+        /// <param name="name">资源名称</param>
+        /// <param name="type">资源Type</param>
+        /// <returns>AssetBundleRequest</returns>
+        internal abstract AssetBundleRequest LoadAssetAsync(string name, Type type);
 
         /// <summary>
         /// 加载资源
