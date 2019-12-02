@@ -9,7 +9,7 @@ Unity AssetBundle
 
 4、支持async-await、Unity Coroutine、回调等方式
 
-//使用async-await加载
+//使用async-await加载  
 private async void Initialize()  
 {
 	Task<AResource> task = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/UIRoot.prefab", 0);
@@ -18,7 +18,7 @@ private async void Initialize()
 	uiRoot.name = task.Result.asset.name;
 }
 
-//使用协程加载
+//使用协程加载  
 private IEnumerator Initialize()  
 {
 	AResource resource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true, 0);
@@ -27,7 +27,7 @@ private IEnumerator Initialize()
 	uiRoot.name = resource.asset.name;
 }
 
-//使用回调加载
+//使用回调加载  
 private void Initialize()  
 {
 	ResourceManager.instance.LoadWithCallback("Assets/AssetBundle/UI/UIRoot.prefab", true, 0, resource =>
@@ -37,7 +37,7 @@ private void Initialize()
 	});
 }
 
-//使用同步加载
+//使用同步加载  
 private void Initialize()  
 {
 	AResource resource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false, 0);
@@ -45,14 +45,14 @@ private void Initialize()
 	uiRoot.name = resource.asset.name;
 }
 
-//同步加载并释放资源
+//同步加载并释放资源  
 private void Initialize()  
 {
 	AResource resource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false, 0);
 	ResourceManager.instance.Unload(resource);
 }
 
-//先异步加载资源，然后同步加载资源，最后释放
+//先异步加载资源，然后同步加载资源，最后释放  
 private void Initialize()  
 {
 	AResource resource1 = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true, 0);
@@ -61,7 +61,7 @@ private void Initialize()
 	ResourceManager.instance.Unload(resource2);
 }
 
-//先同步加载资源，然后异步加载资源，最后释放
+//先同步加载资源，然后异步加载资源，最后释放  
 private void Initialize()  
 {
 	AResource resource1 = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false, 0);
