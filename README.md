@@ -9,7 +9,7 @@ Unity AssetBundle
 
 4、支持async-await、Unity Coroutine、回调等方式
 
-//使用async-await加载  
+//使用async-await加载**** 
 private async void Initialize()  
 {
 	Task<AResource> task = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/UIRoot.prefab", 0);
