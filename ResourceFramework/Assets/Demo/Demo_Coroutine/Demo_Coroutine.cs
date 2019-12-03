@@ -23,7 +23,7 @@ public class Demo_Coroutine : MonoBehaviour
     {
         IResource uiResource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true);
         yield return uiResource;
-        GameObject uiRoot = uiResource.Instantiate();
+        uiResource.Instantiate();
         Transform uiParent = GameObject.Find("Canvas").transform;
 
         IResource testResource = ResourceManager.instance.Load("Assets/AssetBundle/UI/TestUI.prefab", true);
