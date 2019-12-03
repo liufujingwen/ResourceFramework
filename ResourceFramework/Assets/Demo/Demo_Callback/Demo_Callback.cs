@@ -22,13 +22,13 @@ public class Demo_Callback : MonoBehaviour
     {
         ResourceManager.instance.LoadWithCallback("Assets/AssetBundle/UI/UIRoot.prefab", true, uiRootResource =>
         {
-            GameObject uiRoot = uiRootResource.Instantiate();
+            uiRootResource.Instantiate();
 
             Transform uiParent = GameObject.Find("Canvas").transform;
 
             ResourceManager.instance.LoadWithCallback("Assets/AssetBundle/UI/TestUI.prefab", true, testUIResource =>
             {
-                GameObject testUIGO = testUIResource.Instantiate(uiParent, false) as GameObject;
+                testUIResource.Instantiate(uiParent, false);
             });
         });
     }

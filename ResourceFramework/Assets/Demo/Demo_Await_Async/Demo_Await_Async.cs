@@ -23,7 +23,7 @@ public class Demo_Await_Async : MonoBehaviour
     {
         Task<IResource> uiResource = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/UIRoot.prefab");
         await uiResource;
-        GameObject uiRoot = uiResource.Result.Instantiate();
+        uiResource.Result.Instantiate();
 
         Transform uiParent = GameObject.Find("Canvas").transform;
 
