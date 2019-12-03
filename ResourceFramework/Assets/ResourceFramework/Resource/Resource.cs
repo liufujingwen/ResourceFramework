@@ -55,6 +55,9 @@ namespace ResourceFramework
             if (bundle == null)
                 throw new Exception($"{nameof(Resource)}.{nameof(LoadAsset)}() {nameof(bundle)} is null.");
 
+            //正在异步加载的资源要变成同步
+            FreshAsyncAsset();
+
             asset = bundle.LoadAsset(url, typeof(Object));
 
             done = true;
