@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 
 namespace ResourceFramework
 {
-    public class EditorResource : AResource
+    internal class EditorResource : AResource
     {
         public override bool keepWaiting => !done;
 

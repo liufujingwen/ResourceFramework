@@ -41,17 +41,12 @@ namespace ResourceFramework
         /// <summary>
         /// 需要释放的资源
         /// </summary>
-        private List<AResource> m_NeedUnloadList = new List<AResource>();
+        private LinkedList<AResource> m_NeedUnloadList = new LinkedList<AResource>();
 
         /// <summary>
-        /// 使用AssetDataBase进行加载
+        /// 是否使用AssetDataBase进行加载
         /// </summary>
-        private bool m_Editor = false;
-
-        /// <summary>
-        /// 当前游戏运行时间，单位（毫秒）
-        /// </summary>
-        public uint now => (uint)Time.realtimeSinceStartup * 1000;
+        public bool Editor { get; set; }
 
         /// <summary>
         /// 初始化
@@ -150,11 +145,10 @@ namespace ResourceFramework
         /// </summary>
         /// <param name="url">资源Url</param>
         /// <param name="async">是否异步</param>
-        /// <param name="delay">延迟释放时间</param>
         /// <returns> Task<AResource> </returns>
-        public AResource Load(string url, bool async, uint delay)
+        public IResource Load(string url, bool async)
         {
-            return LoadInternal(url, async, delay, false);
+            return LoadInternal(url, async, false);
         }
 
         /// <summary>
@@ -162,18 +156,17 @@ namespace ResourceFramework
         /// </summary>
         /// <param name="url">资源Url</param>
         /// <param name="async">是否异步</param>
-        /// <param name="delay">延迟释放时间</param>
         /// <returns></returns>
-        public Task<AResource> LoadTask(string url, uint delay)
+        public Task<IResource> LoadTask(string url)
         {
-            AResource resource = LoadInternal(url, true, delay, false);
+            AResource resource = LoadInternal(url, true, false);
 
             if (resource.done)
             {
                 if (resource.awaiter == null)
                 {
                     resource.awaiter = new ResourceAwaiter(url);
-                    resource.awaiter.SetResult(resource);
+                    resource.awaiter.SetResult(resource as IResource);
                 }
 
                 return resource.awaiter.taskCompletionSource.Task;
@@ -192,11 +185,10 @@ namespace ResourceFramework
         /// </summary>
         /// <param name="url">资源Url</param>
         /// <param name="async">是否异步</param>
-        /// <param name="delay">延迟释放时间</param>
         /// <param name="callback">加载完成回调</param>
-        public void LoadWithCallback(string url, bool async, uint delay, Action<AResource> callback)
+        public void LoadWithCallback(string url, bool async, Action<IResource> callback)
         {
-            AResource resource = LoadInternal(url, async, delay, false);
+            AResource resource = LoadInternal(url, async, false);
             if (resource.done)
             {
                 callback?.Invoke(resource);
@@ -212,10 +204,9 @@ namespace ResourceFramework
         /// </summary>
         /// <param name="url">资源url</param>
         /// <param name="async">是否异步</param>
-        /// <param name="delay">延迟释放时间</param>
         /// <param name="dependency">是否依赖</param>
         /// <returns></returns>
-        private AResource LoadInternal(string url, bool async, uint delay, bool dependency)
+        private AResource LoadInternal(string url, bool async, bool dependency)
         {
             AResource resource = null;
             if (m_ResourceDic.TryGetValue(url, out resource))
@@ -226,16 +217,13 @@ namespace ResourceFramework
                     m_NeedUnloadList.Remove(resource);
                 }
 
-                if (delay > resource.delay)
-                {
-                    resource.delay = delay;
-                }
                 resource.AddReference();
+
                 return resource;
             }
 
             //创建Resource
-            if (m_Editor)
+            if (Editor)
             {
                 resource = new EditorResource();
             }
@@ -251,7 +239,6 @@ namespace ResourceFramework
             }
 
             resource.url = url;
-            resource.delay = delay;
             m_ResourceDic.Add(url, resource);
 
             //加载依赖
@@ -263,7 +250,7 @@ namespace ResourceFramework
                 for (int i = 0; i < dependencies.Count; i++)
                 {
                     string dependencyUrl = dependencies[i];
-                    AResource dependencyResource = LoadInternal(dependencyUrl, async, delay, true);
+                    AResource dependencyResource = LoadInternal(dependencyUrl, async, true);
                     resource.dependencies[i] = dependencyResource;
                 }
             }
@@ -278,21 +265,19 @@ namespace ResourceFramework
         /// 释放资源
         /// </summary>
         /// <param name="resource"></param>
-        public void Unload(AResource resource)
+        public void Unload(IResource resource)
         {
             if (resource == null)
             {
                 throw new ArgumentException($"{nameof(ResourceManager)}.{nameof(Unload)}() {nameof(resource)} is null.");
             }
 
-            resource.ReduceReference();
+            AResource aResource = resource as AResource;
+            aResource.ReduceReference();
 
-            if (resource.reference == 0)
+            if (aResource.reference == 0)
             {
-
-
-                resource.destroyTime = now + resource.delay;
-                WillUnload(resource);
+                WillUnload(aResource);
             }
         }
 
@@ -302,29 +287,7 @@ namespace ResourceFramework
         /// <param name="resource"></param>
         private void WillUnload(AResource resource)
         {
-            if (m_NeedUnloadList.Count == 0)
-            {
-                m_NeedUnloadList.Add(resource);
-                return;
-            }
-
-            bool insertFlag = false;
-
-            //插入排序,时间大的放前面
-            for (int i = 0; i < m_NeedUnloadList.Count; i++)
-            {
-                AResource temp = m_NeedUnloadList[i];
-                if (temp.destroyTime < resource.destroyTime)
-                {
-                    m_NeedUnloadList.Insert(i, resource);
-                    return;
-                }
-            }
-
-            if (!insertFlag)
-            {
-                m_NeedUnloadList.Add(resource);
-            }
+            m_NeedUnloadList.AddLast(resource);
         }
 
         public void Update()
@@ -341,7 +304,7 @@ namespace ResourceFramework
 
                     if (resourceAsync.awaiter != null)
                     {
-                        resourceAsync.awaiter.SetResult(resourceAsync);
+                        resourceAsync.awaiter.SetResult(resourceAsync as IResource);
                     }
                 }
             }
@@ -352,26 +315,27 @@ namespace ResourceFramework
             if (m_NeedUnloadList.Count == 0)
                 return;
 
-            int lastIndex = m_NeedUnloadList.Count - 1;
-            AResource resource = m_NeedUnloadList[lastIndex];
-
-            if (now < resource.destroyTime)
-                return;
-
-            m_ResourceDic.Remove(resource.url);
-            m_NeedUnloadList.RemoveAt(lastIndex);
-
-            //依赖引用-1
-            if (resource.dependencies != null)
+            while (m_NeedUnloadList.Count > 0)
             {
-                for (int i = 0; i < resource.dependencies.Length; i++)
+                AResource resource = m_NeedUnloadList.First.Value;
+                m_NeedUnloadList.RemoveFirst();
+                if (resource == null)
+                    continue;
+
+                m_ResourceDic.Remove(resource.url);
+
+                resource.UnLoad();
+
+                //依赖引用-1
+                if (resource.dependencies != null)
                 {
-                    AResource temp = resource.dependencies[i];
-                    Unload(temp);
+                    for (int i = 0; i < resource.dependencies.Length; i++)
+                    {
+                        AResource temp = resource.dependencies[i];
+                        Unload(temp);
+                    }
                 }
             }
-
-            resource.UnLoad();
         }
     }
 }

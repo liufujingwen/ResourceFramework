@@ -41,7 +41,7 @@ public class TestUI : MonoBehaviour
     [SerializeField]
     private Transform m_ModelRoot;
     private GameObject m_ModelGO;
-    private AResource m_ModelResource;
+    private IResource m_ModelResource;
 
     [SerializeField]
     private RawImage m_RawImage_Background = null;
@@ -82,8 +82,8 @@ public class TestUI : MonoBehaviour
         string backgroundUrl = m_Backgrounds[m_BackgourndIndex];
 
         //同步加载熊的sprite
-        AResource resource = ResourceManager.instance.Load(backgroundUrl, false, 0);
-        m_RawImage_Background.texture = resource.asset as Texture;
+        IResource resource = ResourceManager.instance.Load(backgroundUrl, false);
+        m_RawImage_Background.texture = resource.GetAsset() as Texture;
     }
 
     /// <summary>
@@ -99,8 +99,8 @@ public class TestUI : MonoBehaviour
         string bearUrl = m_Bears[m_BearIndex];
 
         //同步加载熊的sprite
-        AResource resource = ResourceManager.instance.Load(bearUrl, false, 0);
-        m_Image_Bear.sprite = resource.asset as Sprite;
+        IResource resource = ResourceManager.instance.Load(bearUrl, false);
+        m_Image_Bear.sprite = resource.GetAsset<Sprite>();
     }
 
     /// <summary>
@@ -115,8 +115,8 @@ public class TestUI : MonoBehaviour
         string iconUrl = m_Icons[m_IconIndex];
 
         //同步加载icon
-        AResource resource = ResourceManager.instance.Load(iconUrl, false, 0);
-        m_RawImage_Icon.texture = resource.asset as Texture;
+        IResource resource = ResourceManager.instance.Load(iconUrl, false);
+        m_RawImage_Icon.texture = resource.GetAsset<Texture>();
     }
 
     /// <summary>
@@ -128,8 +128,8 @@ public class TestUI : MonoBehaviour
             return;
 
         //同步加载熊的sprite
-        m_ModelResource = ResourceManager.instance.Load(m_ModelUrl, false, 0);
-        m_ModelGO = Instantiate(m_ModelResource.asset, m_ModelRoot, false) as GameObject;
+        m_ModelResource = ResourceManager.instance.Load(m_ModelUrl, false);
+        m_ModelGO = m_ModelResource.Instantiate(m_ModelRoot, false);
         m_ModelGO.transform.eulerAngles = new Vector3(0, 180, 0);
     }
 

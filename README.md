@@ -9,62 +9,61 @@
 ## 4、支持async-await、Unity Coroutine、回调等方式
 
 //使用async-await加载  
-private async void Initialize()  
+private async void Initialize1()  
 {  
-        Task<AResource> task = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/UIRoot.prefab", 0);  
-        await task;  
-        GameObject uiRoot = Instantiate(task.Result.asset) as GameObject;  
-        uiRoot.name = task.Result.asset.name;  
-}
+	Task<IResource> task = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/UIRoot.prefab");  
+	await task;  
+	GameObject uiRoot = task.Result.Instantiate();  
+	uiRoot.name = task.Result.GetAsset().name;  
+}  
 
 //使用协程加载  
-private IEnumerator Initialize()  
+private IEnumerator Initialize2()  
 {  
-        AResource resource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true, 0);  
-        yield return resource;  
-        GameObject uiRoot = Instantiate(resource.asset) as GameObject;  
-        uiRoot.name = resource.asset.name;  
-}
+	IResource resource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true);  
+	yield return resource;  
+	resource.Instantiate();  
+}  
 
-//使用回调加载  
-private void Initialize()  
+//使用回调加载    
+private void Initialize3()  
 {  
-        ResourceManager.instance.LoadWithCallback("Assets/AssetBundle/UI/UIRoot.prefab", true, 0, resource =>  
-        {
-                GameObject uiRoot = Instantiate(resource.asset) as GameObject;  
-                uiRoot.name = resource.asset.name;  
-        });  
-}
+	ResourceManager.instance.LoadWithCallback("Assets/AssetBundle/UI/UIRoot.prefab", true, resource =>  
+	{  
+		GameObject uiRoot = resource.Instantiate();  
+		uiRoot.name = resource.GetAsset().name;  
+	});  
+}  
 
 //使用同步加载  
-private void Initialize()  
+private void Initialize4()  
 {  
-        AResource resource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false, 0);  
-        GameObject uiRoot = Instantiate(resource.asset) as GameObject;  
-        uiRoot.name = resource.asset.name;  
-}
+	IResource resource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false);  
+	GameObject uiRoot = resource.Instantiate();  
+	uiRoot.name = resource.GetAsset().name;  
+}  
 
 //同步加载并释放资源  
-private void Initialize()  
+private void Initialize5()  
 {  
-        AResource resource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false, 0);  
-        ResourceManager.instance.Unload(resource);  
+	IResource resource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false);  
+	ResourceManager.instance.Unload(resource);  
 }
 
 //先异步加载资源，然后同步加载资源，最后释放  
-private void Initialize()  
+private void Initialize6()  
 {  
-        AResource resource1 = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true, 0);  
-        AResource resource2 = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false, 0);  
-        ResourceManager.instance.Unload(resource1);  
-        ResourceManager.instance.Unload(resource2);  
-}
+	IResource resource1 = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true);  
+	IResource resource2 = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false);  
+	ResourceManager.instance.Unload(resource1);  
+	ResourceManager.instance.Unload(resource2);  
+}  
 
 //先同步加载资源，然后异步加载资源，最后释放  
-private void Initialize()  
+private void Initialize7()  
 {  
-        AResource resource1 = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false, 0);  
-        AResource resource2 = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true, 0);  
-        ResourceManager.instance.Unload(resource1);  
-        ResourceManager.instance.Unload(resource2);  
-}
+	IResource resource1 = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", false);  
+	IResource resource2 = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true);  
+	ResourceManager.instance.Unload(resource1);  
+	ResourceManager.instance.Unload(resource2);  
+}  

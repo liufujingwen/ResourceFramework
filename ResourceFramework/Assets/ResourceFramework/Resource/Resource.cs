@@ -42,6 +42,7 @@ namespace ResourceFramework
             }
 
             BundleManager.instance.UnLoad(bundle);
+
             bundle = null;
             awaiter = null;
             finishedCallback = null;

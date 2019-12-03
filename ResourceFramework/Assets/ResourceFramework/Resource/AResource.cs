@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 
 namespace ResourceFramework
 {
-    public abstract class AResource : CustomYieldInstruction
+    internal abstract class AResource : CustomYieldInstruction, IResource
     {
         /// <summary>
         /// Asset对应的Url
@@ -31,16 +31,6 @@ namespace ResourceFramework
         /// </summary>
         internal int reference { get; set; }
 
-        /// <summary>
-        /// 延迟销毁时间，单位（毫秒）
-        /// </summary>
-        internal uint delay { get; set; }
-
-        /// <summary>
-        /// 销毁的时间
-        /// </summary>
-        internal uint destroyTime { get; set; }
-
         //是否加载完成
         internal bool done { get; set; }
 
@@ -53,6 +43,19 @@ namespace ResourceFramework
         /// 加载完成回调
         /// </summary>
         internal Action<AResource> finishedCallback { get; set; }
+
+        string IResource.url
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         /// <summary>
         /// 加载资源
@@ -98,7 +101,6 @@ namespace ResourceFramework
         internal void AddReference()
         {
             ++reference;
-            destroyTime = 0;
         }
 
         /// <summary>
@@ -113,5 +115,56 @@ namespace ResourceFramework
                 throw new Exception($"{GetType()}.{nameof(ReduceReference)}() less than 0,{nameof(url)}:{url}.");
             }
         }
+
+        public Object GetAsset()
+        {
+            return asset;
+        }
+
+        public T GetAsset<T>() where T : Object
+        {
+            return asset as T;
+        }
+
+        public GameObject Instantiate()
+        {
+            Object obj = asset;
+
+            if (!obj)
+                return null;
+
+            if (!(obj is GameObject))
+                return null;
+
+            return Object.Instantiate(obj) as GameObject;
+        }
+
+        public GameObject Instantiate(Vector3 position, Quaternion rotation)
+        {
+            Object obj = asset;
+
+            if (!obj)
+                return null;
+
+            if (!(obj is GameObject))
+                return null;
+
+            return Object.Instantiate(obj, position, rotation) as GameObject;
+        }
+
+        public GameObject Instantiate(Transform parent, bool instantiateInWorldSpace)
+        {
+            Object obj = asset;
+
+            if (!obj)
+                return null;
+
+            if (!(obj is GameObject))
+                return null;
+
+            return Object.Instantiate(obj, parent, instantiateInWorldSpace) as GameObject;
+        }
+
+
     }
 }

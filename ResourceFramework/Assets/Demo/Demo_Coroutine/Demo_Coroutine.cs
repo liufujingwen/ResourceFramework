@@ -21,17 +21,14 @@ public class Demo_Coroutine : MonoBehaviour
 
     private IEnumerator Initialize()
     {
-        AResource uiResource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true, 0);
+        IResource uiResource = ResourceManager.instance.Load("Assets/AssetBundle/UI/UIRoot.prefab", true);
         yield return uiResource;
-        GameObject uiRoot = Instantiate(uiResource.asset) as GameObject;
-        uiRoot.name = uiResource.asset.name;
-
+        GameObject uiRoot = uiResource.Instantiate();
         Transform uiParent = GameObject.Find("Canvas").transform;
 
-        AResource testResource = ResourceManager.instance.Load("Assets/AssetBundle/UI/TestUI.prefab", true, 0);
+        IResource testResource = ResourceManager.instance.Load("Assets/AssetBundle/UI/TestUI.prefab", true);
         yield return testResource;
-        GameObject testUIGO = Instantiate(testResource.asset, uiParent, false) as GameObject;
-        testUIGO.name = testResource.asset.name;
+        testResource.Instantiate(uiParent, false);
     }
 
     private string GetPlatform()

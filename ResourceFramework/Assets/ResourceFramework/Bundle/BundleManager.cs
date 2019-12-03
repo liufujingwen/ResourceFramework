@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using UnityEngine;
 
 namespace ResourceFramework
 {
@@ -84,6 +85,7 @@ namespace ResourceFramework
             {
                 //从缓存中取并引用+1
                 bundle.AddReference();
+
                 return bundle;
             }
 
@@ -102,6 +104,7 @@ namespace ResourceFramework
 
             m_BundleDic.Add(url, bundle);
             bundle.AddReference();
+
             bundle.Load();
 
             return bundle;
@@ -122,10 +125,11 @@ namespace ResourceFramework
             //引用为0,直接释放
             if (bundle.reference == 0)
             {
-                //严格遵循要加载完了才能释放
-                if (!bundle.done)
+                if (!bundle.done && bundle is BundleAsync)
                 {
-                    return;
+                    BundleAsync bundleAsync = bundle as BundleAsync;
+                    if(m_AsyncList.Contains(bundleAsync))
+                        m_AsyncList.Remove(bundleAsync);
                 }
 
                 m_BundleDic.Remove(bundle.url);

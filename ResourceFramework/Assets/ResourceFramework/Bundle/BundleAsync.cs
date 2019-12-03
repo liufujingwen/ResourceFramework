@@ -42,14 +42,33 @@ namespace ResourceFramework
         /// </summary>
         internal override void UnLoad()
         {
+            if (url == "assets/assetbundle/model/gebulin/animations.ab" || url == "assets/assetbundle/model/gebulin.ab")
+            {
+                Debug.LogError("Unload Bundle:" + url);
+            }
+
             if (assetBundle)
             {
-                m_AssetBundleCreateRequest = null;
-                done = false;
                 assetBundle.Unload(true);
-                assetBundle = null;
-                reference = 0;
             }
+            else
+            {
+                //正在异步加载的资源也要切到主线程进行释放
+                if (m_AssetBundleCreateRequest != null)
+                {
+                    assetBundle = m_AssetBundleCreateRequest.assetBundle;
+                }
+
+                if (assetBundle)
+                {
+                    assetBundle.Unload(true);
+                }
+            }
+
+            m_AssetBundleCreateRequest = null;
+            done = false;
+            reference = 0;
+            assetBundle = null;
         }
 
         /// <summary>

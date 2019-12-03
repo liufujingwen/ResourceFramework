@@ -20,17 +20,15 @@ public class Demo_Callback : MonoBehaviour
 
     private void Initialize()
     {
-        ResourceManager.instance.LoadWithCallback("Assets/AssetBundle/UI/UIRoot.prefab", true, 0, uiRootResource =>
+        ResourceManager.instance.LoadWithCallback("Assets/AssetBundle/UI/UIRoot.prefab", true, uiRootResource =>
         {
-            GameObject uiRoot = Instantiate(uiRootResource.asset) as GameObject;
-            uiRoot.name = uiRootResource.asset.name;
+            GameObject uiRoot = uiRootResource.Instantiate();
 
             Transform uiParent = GameObject.Find("Canvas").transform;
 
-            ResourceManager.instance.LoadWithCallback("Assets/AssetBundle/UI/TestUI.prefab", true, 0, testUIResource =>
+            ResourceManager.instance.LoadWithCallback("Assets/AssetBundle/UI/TestUI.prefab", true, testUIResource =>
             {
-                GameObject testUIGO = Instantiate(testUIResource.asset, uiParent, false) as GameObject;
-                testUIGO.name = testUIResource.asset.name;
+                GameObject testUIGO = testUIResource.Instantiate(uiParent, false) as GameObject;
             });
         });
     }

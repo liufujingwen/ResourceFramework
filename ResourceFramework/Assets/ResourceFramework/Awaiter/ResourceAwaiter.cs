@@ -11,12 +11,12 @@ namespace ResourceFramework
         public ResourceAwaiter(string url)
         {
             this.url = url;
-            taskCompletionSource = new TaskCompletionSource<AResource>();
+            taskCompletionSource = new TaskCompletionSource<IResource>();
         }
 
-        public TaskCompletionSource<AResource> taskCompletionSource { get; private set; }
+        public TaskCompletionSource<IResource> taskCompletionSource { get; private set; }
 
-        public void SetResult(AResource resource)
+        internal void SetResult(IResource resource)
         {
             taskCompletionSource.SetResult(resource);
         }
