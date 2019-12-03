@@ -1,13 +1,12 @@
 # ResourceFramework
-Unity AssetBundle
 
-1、通过BuildSetting.xml控制打包规则、粒度等等
+## 1、通过BuildSetting.xml控制打包规则、粒度等等
 
-2、支持Bundle、Editor加载模式
+## 2、支持Bundle、Editor加载模式
 
-3、同步异步无缝切换
+## 3、同步异步无缝切换
 
-4、支持async-await、Unity Coroutine、回调等方式
+## 4、支持async-await、Unity Coroutine、回调等方式
 
 //使用async-await加载  
 private async void Initialize()  
