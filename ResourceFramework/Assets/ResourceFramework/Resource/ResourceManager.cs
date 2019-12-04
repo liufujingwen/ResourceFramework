@@ -161,9 +161,8 @@ namespace ResourceFramework
         /// 异步加载资源
         /// </summary>
         /// <param name="url">资源Url</param>
-        /// <param name="async">是否异步</param>
         /// <returns></returns>
-        public Task<IResource> LoadTask(string url)
+        public ResourceAwaiter LoadWithAwaiter(string url)
         {
             AResource resource = LoadInternal(url, true, false);
 
@@ -171,19 +170,17 @@ namespace ResourceFramework
             {
                 if (resource.awaiter == null)
                 {
-                    resource.awaiter = new ResourceAwaiter(url);
+                    resource.awaiter = new ResourceAwaiter();
                     resource.awaiter.SetResult(resource as IResource);
                 }
 
-                return resource.awaiter.taskCompletionSource.Task;
+                return resource.awaiter;
             }
 
             if (resource.awaiter == null)
-            {
-                resource.awaiter = new ResourceAwaiter(url);
-            }
+                resource.awaiter = new ResourceAwaiter();
 
-            return resource.awaiter.taskCompletionSource.Task;
+            return resource.awaiter;
         }
 
         /// <summary>

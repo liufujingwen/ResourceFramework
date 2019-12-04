@@ -1,24 +1,42 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace ResourceFramework
 {
-    public class ResourceAwaiter
+    public class ResourceAwaiter : IAwaiter<IResource>, IAwaitable<ResourceAwaiter, IResource>
     {
-        public string url { get; private set; }
+        public bool IsCompleted { get; private set; }
+        public IResource result { get; private set; }
+        private Action m_Continuation;
 
-        public ResourceAwaiter(string url)
+        public IResource GetResult()
         {
-            this.url = url;
-            taskCompletionSource = new TaskCompletionSource<IResource>();
+            return result;
         }
 
-        public TaskCompletionSource<IResource> taskCompletionSource { get; private set; }
-
-        internal void SetResult(IResource resource)
+        public ResourceAwaiter GetAwaiter()
         {
-            taskCompletionSource.SetResult(resource);
+            return this;
+        }
+
+        public void OnCompleted(Action continuation)
+        {
+            if (IsCompleted)
+            {
+                continuation.Invoke();
+            }
+            else
+            {
+                m_Continuation += continuation;
+            }
+        }
+
+        internal void SetResult(IResource result)
+        {
+            IsCompleted = true;
+            this.result = result;
+            Action tempCallback = m_Continuation;
+            m_Continuation = null;
+            tempCallback.Invoke();
         }
     }
 }

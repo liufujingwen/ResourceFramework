@@ -19,10 +19,10 @@ public class Test : MonoBehaviour
     //使用async-await加载  
     private async void Initialize1()
     {
-        Task<IResource> task = ResourceManager.instance.LoadTask("Assets/AssetBundle/UI/UIRoot.prefab");
-        await task;
-        GameObject uiRoot = task.Result.Instantiate();
-        uiRoot.name = task.Result.GetAsset().name;
+        ResourceAwaiter awaiter = ResourceManager.instance.LoadWithAwaiter("Assets/AssetBundle/UI/UIRoot.prefab");
+        await awaiter;
+        GameObject uiRoot = awaiter.GetResult().Instantiate();
+        uiRoot.name = awaiter.GetResult().GetAsset().name;
     }
 
     //使用协程加载  

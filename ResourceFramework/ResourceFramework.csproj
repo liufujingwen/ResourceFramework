@@ -267,6 +267,7 @@
     <Compile Include="Assets\Demo\Demo_Coroutine\Demo_Coroutine.cs" />
     <Compile Include="Assets\Demo\Test.cs" />
     <Compile Include="Assets\Demo\TestUI.cs" />
+    <Compile Include="Assets\ResourceFramework\Awaiter\AwaiterInterfaces.cs" />
     <Compile Include="Assets\ResourceFramework\Awaiter\ResourceAwaiter.cs" />
     <Compile Include="Assets\ResourceFramework\Bundle\ABundle.cs" />
     <Compile Include="Assets\ResourceFramework\Bundle\ABundleAsync.cs" />
