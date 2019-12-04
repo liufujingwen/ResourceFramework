@@ -46,15 +46,21 @@ namespace ResourceFramework
         /// <summary>
         /// 是否使用AssetDataBase进行加载
         /// </summary>
-        public bool Editor { get; set; }
+        private bool m_Editor;
 
         /// <summary>
         /// 初始化
         /// </summary>
         /// <param name="getFileCallback">获取资源真实路径回调</param>
+        /// <param name="editor">是否使用AssetDataBase加载</param>
         /// <param name="offset">获取bundle的偏移</param>
-        public void Initialize(Func<string, string> getFileCallback, ulong offset)
+        public void Initialize(Func<string, string> getFileCallback, bool editor, ulong offset)
         {
+            m_Editor = editor;
+
+            if (m_Editor)
+                return;
+
             BundleManager.instance.Initialize(getFileCallback, offset);
 
             string manifestBunldeFile = getFileCallback.Invoke(MANIFEST_BUNDLE);
@@ -223,7 +229,7 @@ namespace ResourceFramework
             }
 
             //创建Resource
-            if (Editor)
+            if (m_Editor)
             {
                 resource = new EditorResource();
             }
