@@ -9,7 +9,7 @@ namespace ResourceFramework
         /// <summary>
         /// Asset对应的Url
         /// </summary>
-        internal string url { get; set; }
+        public string url { get; set; }
 
         /// <summary>
         /// 加载完成的资源
@@ -43,19 +43,6 @@ namespace ResourceFramework
         /// 加载完成回调
         /// </summary>
         internal Action<AResource> finishedCallback { get; set; }
-
-        string IResource.url
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
 
         /// <summary>
         /// 加载资源
@@ -121,10 +108,7 @@ namespace ResourceFramework
             return asset;
         }
 
-        public T GetAsset<T>() where T : Object
-        {
-            return asset as T;
-        }
+        public abstract T GetAsset<T>() where T : Object;
 
         public GameObject Instantiate()
         {
@@ -164,7 +148,5 @@ namespace ResourceFramework
 
             return Object.Instantiate(obj, parent, instantiateInWorldSpace) as GameObject;
         }
-
-
     }
 }

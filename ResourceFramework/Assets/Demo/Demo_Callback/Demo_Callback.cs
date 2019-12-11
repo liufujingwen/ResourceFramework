@@ -13,7 +13,7 @@ public class Demo_Callback : MonoBehaviour
         Platform = GetPlatform();
         PrefixPath = Path.GetFullPath(Path.Combine(Application.dataPath, "../../build")).Replace("\\", "/");
         PrefixPath += $"/{Platform}/{BUNDLE_FOLDER_NAME}";
-        ResourceManager.instance.Initialize(GetFileUrl, false, 0);
+        ResourceManager.instance.Initialize(GetFileUrl, true, 0);
 
         Initialize();
     }

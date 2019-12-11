@@ -4,7 +4,7 @@ namespace ResourceFramework
 {
     public interface IResource
     {
-        string url { get; set; }
+        string url { get; }
         Object GetAsset();
         T GetAsset<T>() where T : Object;
         //

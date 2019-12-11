@@ -37,6 +37,35 @@ namespace ResourceFramework
             }
         }
 
+        public override T GetAsset<T>()
+        {
+            Object tempAsset = asset;
+            Type type = typeof(T);
+            if (type == typeof(Sprite))
+            {
+                if (asset is Sprite)
+                {
+                    return tempAsset as T;
+                }
+                else
+                {
+#if UNITY_EDITOR
+                    if (tempAsset && !(tempAsset is GameObject))
+                    {
+                        Resources.UnloadAsset(tempAsset);
+                    }
+
+                    asset = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(url);
+#endif
+                    return asset as T;
+                }
+            }
+            else
+            {
+                return tempAsset as T;
+            }
+        }
+
         /// <summary>
         /// 卸载资源
         /// </summary>
