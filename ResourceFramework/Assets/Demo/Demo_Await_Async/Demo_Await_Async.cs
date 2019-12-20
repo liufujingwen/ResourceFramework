@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 public class Demo_Await_Async : MonoBehaviour
 {
-    private const string BUNDLE_FOLDER_NAME = "bundle";
     private string PrefixPath { get; set; }
     private string Platform { get; set; }
 
@@ -13,7 +12,7 @@ public class Demo_Await_Async : MonoBehaviour
     {
         Platform = GetPlatform();
         PrefixPath = Path.GetFullPath(Path.Combine(Application.dataPath, "../../build")).Replace("\\", "/");
-        PrefixPath += $"/{Platform}/{BUNDLE_FOLDER_NAME}";
+        PrefixPath += $"/{Platform}";
         ResourceManager.instance.Initialize(GetFileUrl, false, 0);
 
         Initialize();
@@ -38,11 +37,11 @@ public class Demo_Await_Async : MonoBehaviour
         {
             case RuntimePlatform.WindowsEditor:
             case RuntimePlatform.WindowsPlayer:
-                return "windows";
+                return "Windows";
             case RuntimePlatform.Android:
-                return "android";
+                return "Android";
             case RuntimePlatform.IPhonePlayer:
-                return "ios";
+                return "iOS";
             default:
                 throw new System.Exception($"未支持的平台:{Application.platform}");
         }

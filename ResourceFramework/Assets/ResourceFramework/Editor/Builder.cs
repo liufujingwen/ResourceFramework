@@ -12,17 +12,15 @@ namespace ResourceFramework
     public static class Builder
     {
 #if UNITY_IOS
-        private const string PLATFORM = "ios";
+        private const string PLATFORM = "iOS";
 #elif UNITY_ANDROID
-        private const string PLATFORM = "android";
+        private const string PLATFORM = "Android";
 #else
-        private const string PLATFORM = "windows";
+        private const string PLATFORM = "Windows";
 #endif
         //bundle后缀
         public const string BUNDLE_SUFFIX = ".ab";
         public const string BUNDLE_MANIFEST_SUFFIX = ".manifest";
-        //bundle文件夹名称
-        public const string BUNDLE_FOLDER = "bundle";
         //bundle描述文件名称
         public const string MANIFEST = "manifest";
 
@@ -150,7 +148,7 @@ namespace ResourceFramework
             {
                 buildPath += "/";
             }
-            buildPath += $"{PLATFORM}/{BUNDLE_FOLDER}/";
+            buildPath += $"{PLATFORM}/";
 
             return buildSetting;
         }
@@ -597,8 +595,8 @@ namespace ResourceFramework
                 fileSet.Remove($"{path}{bundle}{BUNDLE_MANIFEST_SUFFIX}");
             }
 
-            fileSet.Remove($"{path}{BUNDLE_FOLDER}");
-            fileSet.Remove($"{path}{BUNDLE_FOLDER}{BUNDLE_MANIFEST_SUFFIX}");
+            fileSet.Remove($"{path}{PLATFORM}");
+            fileSet.Remove($"{path}{PLATFORM}{BUNDLE_MANIFEST_SUFFIX}");
 
             Parallel.ForEach(fileSet, ParallelOptions, File.Delete);
         }

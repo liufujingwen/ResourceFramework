@@ -42,11 +42,6 @@ namespace ResourceFramework
         /// </summary>
         internal override void UnLoad()
         {
-            if (url == "assets/assetbundle/model/gebulin/animations.ab" || url == "assets/assetbundle/model/gebulin.ab")
-            {
-                Debug.LogError("Unload Bundle:" + url);
-            }
-
             if (assetBundle)
             {
                 assetBundle.Unload(true);
