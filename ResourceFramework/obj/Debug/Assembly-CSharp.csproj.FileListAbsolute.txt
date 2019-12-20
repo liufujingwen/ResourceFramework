@@ -71,7 +71,6 @@ C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\Unity.UNetWeave
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\Unity.CecilTools.dll
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\Unity.Cecil.Pdb.dll
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\Unity.Cecil.Mdb.dll
-C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\Model.ResourceFramework.pdb
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.xml
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEditor.xml
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.CoreModule.xml
