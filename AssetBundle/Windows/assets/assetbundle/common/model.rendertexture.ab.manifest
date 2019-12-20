@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 4216008134
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 919c4186672bf05c61d6a49b29277d89
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 89010fa122ffffe6344faa21dd7249a1
+HashAppended: 0
+ClassTypes:
+- Class: 84
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle/Common/Model.renderTexture
+Dependencies: []

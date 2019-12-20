@@ -55,20 +55,6 @@
      <Compile Include="Assets\Demo\Demo_Callback\Demo_Callback.cs" />
      <Compile Include="Assets\Demo\Demo_Coroutine\Demo_Coroutine.cs" />
      <Compile Include="Assets\Demo\TestUI.cs" />
-     <Compile Include="Assets\ResourceFramework\Awaiter\AwaiterInterfaces.cs" />
-     <Compile Include="Assets\ResourceFramework\Awaiter\ResourceAwaiter.cs" />
-     <Compile Include="Assets\ResourceFramework\Bundle\ABundle.cs" />
-     <Compile Include="Assets\ResourceFramework\Bundle\ABundleAsync.cs" />
-     <Compile Include="Assets\ResourceFramework\Bundle\Bundle.cs" />
-     <Compile Include="Assets\ResourceFramework\Bundle\BundleAsync.cs" />
-     <Compile Include="Assets\ResourceFramework\Bundle\BundleManager.cs" />
-     <Compile Include="Assets\ResourceFramework\Resource\AResource.cs" />
-     <Compile Include="Assets\ResourceFramework\Resource\AResourceAsync.cs" />
-     <Compile Include="Assets\ResourceFramework\Resource\EditorResource.cs" />
-     <Compile Include="Assets\ResourceFramework\Resource\IResource.cs" />
-     <Compile Include="Assets\ResourceFramework\Resource\Resource.cs" />
-     <Compile Include="Assets\ResourceFramework\Resource\ResourceAsync.cs" />
-     <Compile Include="Assets\ResourceFramework\Resource\ResourceManager.cs" />
      <None Include="Assets\AssetBundle\Shader\DoubleSided.shader" />
      <None Include="Assets\Temp\Bundle.txt" />
      <None Include="Assets\Temp\Resource.txt" />
@@ -250,6 +236,10 @@
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>C:/Users/Administrator/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Model.ResourceFramework.csproj">
+      <Project>{797BBB53-6559-E311-01C7-7950005F9B4C}</Project>      <Name>Model.ResourceFramework</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

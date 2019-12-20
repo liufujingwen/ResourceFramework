@@ -295,6 +295,8 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{E5694630-2B56-10EF-0322-9E9799F1808A}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+    <ProjectReference Include="Model.ResourceFramework.csproj">
+      <Project>{797BBB53-6559-E311-01C7-7950005F9B4C}</Project>      <Name>Model.ResourceFramework</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

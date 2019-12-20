@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 1677946497
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 639602f59b24abf83c280ac43445ac90
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c73412a662fd4e4f36af34cbdf078b85
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle/Model/GeBuLin/Textures/Wea_GebulinJS_D.tga
+- Assets/AssetBundle/Model/GeBuLin/Textures/Wea_GebulinJZ_D.tga
+- Assets/AssetBundle/Model/GeBuLin/Textures/Wea_GebulinZS_D.TGA
+- Assets/AssetBundle/Model/GeBuLin/Textures/Ms_Gebulin_D.tga
+- Assets/AssetBundle/Model/GeBuLin/Textures/Wea_GebulinFS_D.TGA
+Dependencies: []

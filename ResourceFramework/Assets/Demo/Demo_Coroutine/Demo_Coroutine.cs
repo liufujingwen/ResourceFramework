@@ -11,9 +11,9 @@ public class Demo_Coroutine : MonoBehaviour
     private void Start()
     {
         Platform = GetPlatform();
-        PrefixPath = Path.GetFullPath(Path.Combine(Application.dataPath, "../../build")).Replace("\\", "/");
+        PrefixPath = Path.GetFullPath(Path.Combine(Application.dataPath, "../../AssetBundle")).Replace("\\", "/");
         PrefixPath += $"/{Platform}";
-        ResourceManager.instance.Initialize(GetFileUrl, false, 0);
+        ResourceManager.instance.Initialize(GetPlatform(), GetFileUrl, false, 0);
 
         StartCoroutine(Initialize());
     }

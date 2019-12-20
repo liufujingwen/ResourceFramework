@@ -1,0 +1,28 @@
+ManifestFileVersion: 0
+CRC: 447420264
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 859879d17fb66249061de28b4b4088aa
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1b3feb9bc6055cd677abb4cd6f720d90
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle/Atlas/Bear/Bear_7.png
+- Assets/AssetBundle/Atlas/Bear/Bear_5.png
+- Assets/AssetBundle/Atlas/Bear/Bear_6.png
+- Assets/AssetBundle/Atlas/Bear/Bear_8.png
+- Assets/AssetBundle/Atlas/Bear/Bear_3.png
+- Assets/AssetBundle/Atlas/Bear/Bear.spriteatlas
+- Assets/AssetBundle/Atlas/Bear/Bear_4.png
+- Assets/AssetBundle/Atlas/Bear/Bear_1.png
+- Assets/AssetBundle/Atlas/Bear/Bear_2.png
+Dependencies: []

@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 4029903900
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 18a99ae030c1c439c848978ed0cd5968
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6370d3f9de9eca57f523bce048404a46
+HashAppended: 0
+ClassTypes:
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle/Shader/DoubleSided.shader
+Dependencies: []

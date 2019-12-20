@@ -1,0 +1,36 @@
+ManifestFileVersion: 0
+CRC: 2699349438
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d80d44359af8cf7d41d104c2ab24dbb1
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0a4381b8d24d7546af2f9b5d2b1de238
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundle/Model/GeBuLin/Animations/RunFront.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/Enter_03.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/StandDead.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/Attack.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/Diagup.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/Enter_01.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/Idle.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/KnockBack.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/StandHit_02.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/AirDead.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/Guard.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/AirHit.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/Skill_01.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/StandUp.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/StandHit_01.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/WalkFront.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/KnockOut.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/Enter_02.anim
+- Assets/AssetBundle/Model/GeBuLin/Animations/GeBuLin.controller
+Dependencies: []

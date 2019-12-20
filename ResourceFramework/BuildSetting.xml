@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<BuildSetting ProjectName="haru" BuildRoot="../build">
+<BuildSetting ProjectName="haru" BuildRoot="../AssetBundle">
 <BuildItem AssetPath="Assets/AssetBundle/Common/" BundleType="File" Suffix=".renderTexture" />
   <BuildItem AssetPath="Assets/AssetBundle/Atlas/" BundleType="Directory" Suffix=".png|.spriteatlas" />
   <BuildItem AssetPath="Assets/AssetBundle/Background/" BundleType="File" Suffix=".jpg" />
