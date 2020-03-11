@@ -8,6 +8,7 @@
 
 ## 4、支持async-await、Unity Coroutine、回调等方式
 
+```csharp
 //使用async-await加载  
 private async void Initialize1()  
 {  
@@ -67,3 +68,4 @@ private void Initialize7()
 	ResourceManager.instance.Unload(resource1);  
 	ResourceManager.instance.Unload(resource2);  
 }  
+```
