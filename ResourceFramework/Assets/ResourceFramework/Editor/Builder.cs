@@ -359,12 +359,14 @@ namespace ResourceFramework
 
                 //写入个数
                 resourceBw.Write((ushort)assetDic.Count);
-                ushort resourceId = 0;
-                foreach (string assetUrl in assetDic.Keys)
+                //排序
+                List<string> keys = new List<string>(assetDic.Keys);
+                keys.Sort();
+                for (ushort i = 0; i < keys.Count; i++)
                 {
-                    assetIdDic.Add(assetUrl, ++resourceId);
-                    resourceSb.AppendLine($"{resourceId}\t{assetUrl}");
-                    resourceBw.Write(resourceId);
+                    string assetUrl = keys[i];
+                    assetIdDic.Add(assetUrl, (ushort)i);
+                    resourceSb.AppendLine($"{i}\t{assetUrl}");
                     resourceBw.Write(assetUrl);
                 }
 

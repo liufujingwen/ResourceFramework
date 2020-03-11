@@ -12,7 +12,7 @@ public class Demo_Callback : MonoBehaviour
         Platform = GetPlatform();
         PrefixPath = Path.GetFullPath(Path.Combine(Application.dataPath, "../../AssetBundle")).Replace("\\", "/");
         PrefixPath += $"/{Platform}";
-        ResourceManager.instance.Initialize(GetPlatform(), GetFileUrl, true, 0);
+        ResourceManager.instance.Initialize(GetPlatform(), GetFileUrl, false, 0);
 
         Initialize();
     }

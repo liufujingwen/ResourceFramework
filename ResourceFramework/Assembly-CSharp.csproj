@@ -214,9 +214,6 @@
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/2017.4.35f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.PerformanceTesting">
- <HintPath>C:/Program Files/Unity/2017.4.35f1/Editor/Data/UnityExtensions/Unity/PerformanceTesting/UnityEngine.PerformanceTesting.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.TestRunner">
  <HintPath>C:/Program Files/Unity/2017.4.35f1/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
  </Reference>

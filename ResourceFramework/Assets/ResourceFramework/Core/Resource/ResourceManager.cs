@@ -87,11 +87,10 @@ namespace ResourceFramework
                 BinaryReader resourceBinaryReader = new BinaryReader(resourceMemoryStream);
                 //获取资源个数
                 ushort resourceCount = resourceBinaryReader.ReadUInt16();
-                for (int i = 0; i < resourceCount; i++)
+                for (ushort i = 0; i < resourceCount; i++)
                 {
-                    ushort assetId = resourceBinaryReader.ReadUInt16();
                     string assetUrl = resourceBinaryReader.ReadString();
-                    assetUrlDic.Add(assetId, assetUrl);
+                    assetUrlDic.Add(i, assetUrl);
                 }
             }
             #endregion
