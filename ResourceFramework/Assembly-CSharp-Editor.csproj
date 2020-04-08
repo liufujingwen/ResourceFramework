@@ -55,7 +55,7 @@
      <Compile Include="Assets\ResourceFramework\Editor\BuildItem.cs" />
      <Compile Include="Assets\ResourceFramework\Editor\BuildSetting.cs" />
      <Compile Include="Assets\ResourceFramework\Editor\EBundleType.cs" />
-     <Compile Include="Assets\ResourceFramework\Editor\EReferenceType.cs" />
+     <Compile Include="Assets\ResourceFramework\Editor\EResourceType.cs" />
      <Compile Include="Assets\ResourceFramework\Editor\XmlUtility.cs" />
  <Reference Include="UnityEngine.CoreModule">
  <HintPath>C:/Program Files/Unity/2017.4.35f1/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>

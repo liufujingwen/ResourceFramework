@@ -10,6 +10,10 @@ namespace ResourceFramework
         [XmlAttribute("AssetPath")]
         public string assetPath { get; set; }
 
+        [DisplayName("资源类型")]
+        [XmlAttribute("ResourceType")]
+        public EResourceType resourceType { get; set; } = EResourceType.Direct;
+
         [DisplayName("ab粒度类型")]
         [XmlAttribute("BundleType")]
         public EBundleType bundleType { get; set; } = EBundleType.File;
@@ -17,6 +21,9 @@ namespace ResourceFramework
         [DisplayName("资源后缀")]
         [XmlAttribute("Suffix")]
         public string suffix { get; set; } = ".prefab";
+
+        [XmlIgnore]
+        public List<string> ignorePaths { get; set; } = new List<string>();
 
         [XmlIgnore]
         public List<string> suffixes { get; set; } = new List<string>();

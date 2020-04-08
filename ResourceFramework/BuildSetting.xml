@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <BuildSetting ProjectName="haru" BuildRoot="../AssetBundle">
-<BuildItem AssetPath="Assets/AssetBundle/Common/" BundleType="File" Suffix=".renderTexture" />
-  <BuildItem AssetPath="Assets/AssetBundle/Atlas/" BundleType="Directory" Suffix=".png|.spriteatlas" />
-  <BuildItem AssetPath="Assets/AssetBundle/Background/" BundleType="File" Suffix=".jpg" />
-  <BuildItem AssetPath="Assets/AssetBundle/Icon/" BundleType="Directory" Suffix=".png" />
-  <BuildItem AssetPath="Assets/AssetBundle/Model/" BundleType="Directory" Suffix=".prefab" />
-  <BuildItem AssetPath="Assets/AssetBundle/Shader/" BundleType="Directory" Suffix=".shader" />
-  <BuildItem AssetPath="Assets/AssetBundle/UI/" BundleType="File" Suffix=".prefab" />
+<BuildItem AssetPath="Assets/AssetBundle/Common/" ResourceType="Direct" BundleType="File" Suffix=".renderTexture" />
+  <BuildItem AssetPath="Assets/AssetBundle/Atlas/" ResourceType="Direct" BundleType="Directory" Suffix=".png|.spriteatlas" />
+  <BuildItem AssetPath="Assets/AssetBundle/Background/" ResourceType="Direct" BundleType="File" Suffix=".jpg" />
+  <BuildItem AssetPath="Assets/AssetBundle/Icon/" ResourceType="Direct" BundleType="Directory" Suffix=".png" />
+  <BuildItem AssetPath="Assets/AssetBundle/Model/" ResourceType="Direct" BundleType="Directory" Suffix=".prefab" />
+  <BuildItem AssetPath="Assets/AssetBundle/Shader/" ResourceType="Direct" BundleType="Directory" Suffix=".shader" />
+  <BuildItem AssetPath="Assets/AssetBundle/UI/" ResourceType="Direct" BundleType="File" Suffix=".prefab" />
 </BuildSetting>
