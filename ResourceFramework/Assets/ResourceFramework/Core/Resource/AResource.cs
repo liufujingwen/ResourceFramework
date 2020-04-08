@@ -123,6 +123,18 @@ namespace ResourceFramework
             return Object.Instantiate(obj) as GameObject;
         }
 
+        public GameObject Instantiate(bool autoUnload)
+        {
+            GameObject go = Instantiate();
+            if (autoUnload && go)
+            {
+                AutoUnload temp = go.AddComponent<AutoUnload>();
+                temp.resource = this;
+            }
+
+            return go;
+        }
+
         public GameObject Instantiate(Vector3 position, Quaternion rotation)
         {
             Object obj = asset;
@@ -136,6 +148,18 @@ namespace ResourceFramework
             return Object.Instantiate(obj, position, rotation) as GameObject;
         }
 
+        public GameObject Instantiate(Vector3 position, Quaternion rotation, bool autoUnload)
+        {
+            GameObject go = Instantiate(position, rotation);
+            if (autoUnload && go)
+            {
+                AutoUnload temp = go.AddComponent<AutoUnload>();
+                temp.resource = this;
+            }
+
+            return go;
+        }
+
         public GameObject Instantiate(Transform parent, bool instantiateInWorldSpace)
         {
             Object obj = asset;
@@ -147,6 +171,18 @@ namespace ResourceFramework
                 return null;
 
             return Object.Instantiate(obj, parent, instantiateInWorldSpace) as GameObject;
+        }
+
+        public GameObject Instantiate(Transform parent, bool instantiateInWorldSpace, bool autoUnload)
+        {
+            GameObject go = Instantiate(parent, instantiateInWorldSpace);
+            if (autoUnload && go)
+            {
+                AutoUnload temp = go.AddComponent<AutoUnload>();
+                temp.resource = this;
+            }
+
+            return go;
         }
     }
 }

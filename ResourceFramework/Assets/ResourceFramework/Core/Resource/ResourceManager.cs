@@ -285,9 +285,25 @@ namespace ResourceFramework
         }
 
         /// <summary>
+        /// 通过路径释放资源
+        /// </summary>
+        /// <param name="assetUrl"></param>
+        public void Unload(string assetUrl)
+        {
+            if (string.IsNullOrEmpty(assetUrl))
+                throw new ArgumentException($"{nameof(ResourceManager)}.{nameof(Unload)}() {nameof(assetUrl)} is null.");
+
+            AResource resource;
+            if(!m_ResourceDic.TryGetValue(assetUrl,out resource))
+                throw new Exception($"{nameof(ResourceManager)}.{nameof(Unload)}(),Unload [{assetUrl}] failed.");
+
+            Unload(resource);
+        }
+
+        /// <summary>
         /// 即将要释放的资源
         /// </summary>
-        /// <param name="resource"></param>
+        /// <param name="resource">资源路径</param>
         private void WillUnload(AResource resource)
         {
             m_NeedUnloadList.AddLast(resource);
