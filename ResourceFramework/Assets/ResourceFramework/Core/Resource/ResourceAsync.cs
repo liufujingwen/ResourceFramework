@@ -69,13 +69,16 @@ namespace ResourceFramework
             if (bundle == null)
                 throw new Exception($"{nameof(ResourceAsync)}.{nameof(LoadAsset)}() {nameof(bundle)} is null.");
 
-            if (m_AssetBundleRequest != null)
+            if (!bundle.isStreamedSceneAssetBundle)
             {
-                asset = m_AssetBundleRequest.asset;
-            }
-            else
-            {
-                asset = bundle.LoadAsset(url, typeof(Object));
+                if (m_AssetBundleRequest != null)
+                {
+                    asset = m_AssetBundleRequest.asset;
+                }
+                else
+                {
+                    asset = bundle.LoadAsset(url, typeof(Object));
+                }
             }
 
             done = true;

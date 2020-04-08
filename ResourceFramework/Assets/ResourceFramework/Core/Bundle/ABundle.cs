@@ -12,6 +12,11 @@ namespace ResourceFramework
         internal AssetBundle assetBundle { get; set; }
 
         /// <summary>
+        /// 是否是场景
+        /// </summary>
+        internal bool isStreamedSceneAssetBundle { get; set; }
+
+        /// <summary>
         /// bundle url
         /// </summary>
         internal string url { get; set; }

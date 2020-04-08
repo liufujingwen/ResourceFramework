@@ -28,6 +28,8 @@ namespace ResourceFramework
 
             assetBundle = AssetBundle.LoadFromFile(file, 0, BundleManager.instance.offset);
 
+            isStreamedSceneAssetBundle = assetBundle.isStreamedSceneAssetBundle;
+
             done = true;
         }
 
@@ -37,11 +39,12 @@ namespace ResourceFramework
         internal override void UnLoad()
         {
             if (assetBundle)
-            {
-                done = false;
                 assetBundle.Unload(true);
-                assetBundle = null;
-            }
+
+            assetBundle = null;
+            done = false;
+            reference = 0;
+            isStreamedSceneAssetBundle = false;
         }
 
         /// <summary>

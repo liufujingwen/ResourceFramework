@@ -29,7 +29,6 @@ C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.Net
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.ParticlesLegacyModule.dll
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.ParticleSystemModule.dll
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.PerformanceReportingModule.dll
-C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.PerformanceTesting.dll
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.Physics2DModule.dll
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.PhysicsModule.dll
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.Purchasing.dll
@@ -120,7 +119,6 @@ C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.Uni
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.VideoModule.xml
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.WindModule.xml
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.UI.xml
-C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.PerformanceTesting.xml
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.TestRunner.xml
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\nunit.framework.xml
 C:\D\Projects\ResourceFramework\ResourceFramework\Temp\bin\Debug\UnityEngine.Timeline.xml

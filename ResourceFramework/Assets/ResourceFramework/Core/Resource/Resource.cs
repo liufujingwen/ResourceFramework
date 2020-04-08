@@ -59,6 +59,9 @@ namespace ResourceFramework
             //正在异步加载的资源要变成同步
             FreshAsyncAsset();
 
+            if (!bundle.isStreamedSceneAssetBundle)
+                asset = bundle.LoadAsset(url, typeof(Object));
+
             asset = bundle.LoadAsset(url, typeof(Object));
 
             done = true;

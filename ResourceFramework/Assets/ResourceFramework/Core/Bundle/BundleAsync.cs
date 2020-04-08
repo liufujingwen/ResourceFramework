@@ -64,6 +64,7 @@ namespace ResourceFramework
             done = false;
             reference = 0;
             assetBundle = null;
+            isStreamedSceneAssetBundle = false;
         }
 
         /// <summary>
@@ -127,6 +128,8 @@ namespace ResourceFramework
             done = true;
 
             assetBundle = m_AssetBundleCreateRequest.assetBundle;
+            
+            isStreamedSceneAssetBundle = assetBundle.isStreamedSceneAssetBundle;
 
             if (reference == 0)
             {
